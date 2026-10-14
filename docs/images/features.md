@@ -1,32 +1,53 @@
 # Feature illustrations
 
-Created on 14 October 2026 using the built-in image generation tool. These are
-conceptual documentation illustrations, not screenshots, extracted assets or
-promises of additional characters, enemies or mechanics.
+Revised on 14 October 2026 to replace fictional generated objects with actual
+project/game resources at the user's request. Both PNGs are 2172 × 724 pixels.
+They are documentation compositions, not screenshots or additional game content.
+
+## Current composition
 
 - `feature-randomization.png`: enemies, items, shops, magic, music and seed-based configuration.
 - `feature-customization.png`: new armor, alternate player models and optional gameplay modifiers.
 
-The approved README banner was visually inspected as the style reference. Both
-images use the same dark plum, grey-green and cyan menu palette, restrained pixel
-lettering and green wireframe transitions. Unlike the banner's final title, the
-lettering in these two illustrations was generated, not typeset from the game font.
-The conceptual portraits and icons are illustrative and do not depict exact game
-models. Each image was generated once and visually checked for spelling, layout,
-feature accuracy and consistency with the approved banner.
+ImageMagick composes the sources directly. Pixel assets are enlarged with
+nearest-neighbor sampling; their colors, facial features and shapes are not
+regenerated. The Stranger model preview is cropped and reduced. Header, footer
+and feature labels use the original USA game font and its glyph metrics, as
+described in [the banner notes](README.md). The dark plum panels and restrained
+grey-green rules follow the approved banner's menu styling.
 
-## Randomization prompt
+## Sources
 
-```text
-Use case: ads-marketing / infographic-diagram. Make ONE understated horizontal README feature illustration for the Randomized Eve II project, a Parasite Eve II randomizer. Match the approved banner visible in the conversation: opaque very dark plum-purple menu panel, thin worn grey-green rectangular border, sparse muted green low-polygon wireframe transitioning into small solid game-like objects, small cyan section label and bold warm ivory chunky pixel lettering. PS1 interface, simple measured layout, minimal decorative effects. Aspect ratio 3:1, approximately 2172x724.
-Composition: cyan heading "REMIX THE JOURNEY" on a narrow black top strip. Beneath it, FIVE equal vertical menu cells arranged horizontally, separated by restrained vertical rules. In each cell a tasteful small original conceptual PS1-style icon emerging from a sparse green triangular mesh and a single ivory label beneath. Icons and labels left to right: a crouched nonhuman mutant silhouette for "ENEMIES"; a small red medical kit with two ammo cartridges for "ITEMS"; a plain item-storage case for "SHOPS"; a small blue-orange energy sphere for "MAGIC"; a small musical note with a restrained waveform for "MUSIC". Bottom thin black strip with exact small cyan text "CHOOSE YOUR OPTIONS. SHARE YOUR SEED."
-Keep everything beautifully legible at README scale, flat deep plum background, crisp simple rectangular framing, pixel-edge lettering with grey bevel/shadow like original Parasite Eve II menu typography. Icons should look like restrained period game inventory illustrations, not photorealistic or generic modern UI stickers. Only the stated text, no extra stats or numbers. This is a conceptual promotional illustration, NOT a game screenshot, no invented gameplay, no characters, no weapon combat, no claims about bosses. NO neon bloom, NO excessive filigree, NO metallic chrome, NO gradients on lettering, NO modern rounded cards, NO giant title. Cohesive with a dark purple survival-horror inventory screen.
-```
+The following paths refer to the development workspace from which this standalone
+source edition was prepared. They are provenance records, not build dependencies.
+No ROMs, font atlas or extraction tools are required to display these final PNGs.
 
-## Customization prompt
+| Panel | Actual source | Treatment |
+| --- | --- | --- |
+| Enemies | `blender_pg/patio_stranger_0x13/patio-preview.png` | Preview render of the original Patio Stranger game model; crop and reduction. This is not an emulator screenshot. |
+| Items | `pe2randomizer/art/new-weapons-ak-20261006/references/m4a1-inventory.png` | Original retail M4A1 inventory image, enlarged 3×. It represents the weapon/item pool; it is not the parked AK variant. |
+| Shops | Original game font | `BP`, the game's shop currency abbreviation; no invented shop art. |
+| Magic | Native retail UI atlas, 4 bpp with CLUT `0x3C08` | Twelve original PE icons, UV rectangle `(176,128)` through `(223,191)`, enlarged 5×. Atlas originates from STAGE0.CDF folder 1, texture 3 and CLUT 4, rendered by the existing UI texture inspection tooling. |
+| Music | Original game font | `BGM`; no invented in-game music icon. |
+| New armor | `pe2randomizer/art/armor-restyle-20261005/approved-game-20261006/assets/015mini.png` | Approved Power Armor inventory image in its final game palette, enlarged 4×, including its separate helmet. This image was AI-assisted during the earlier armor art workflow. |
+| Player models | `pe2randomizer/art/male-players-20261007/game/kyle.png` and `rupert.png` | Approved game-ready Kyle and Rupert portrait images, enlarged 5× with their existing transparency preserved. These portraits were AI-assisted during the earlier portrait workflow. |
+| Gameplay modifiers | Crop from the initial generated customization illustration | Three abstract option sliders retained as a documentation motif. They are not a claim that the game contains these controls. |
 
-```text
-Use case: ads-marketing / infographic-diagram. Make ONE understated horizontal README feature illustration for the Randomized Eve II project, a Parasite Eve II randomizer. This is a companion to the just-generated REMIX THE JOURNEY feature panel and the approved README banner. Maintain their EXACT graphic language: opaque very dark plum-purple menu panel, thin worn grey-green rectangular border and dividers, simple cyan pixel section label in narrow black header, ivory chunky pixel labels with subtle dark offset shadows. Small conceptual PS1 inventory illustrations emerging from sparse muted green triangular low-polygon wireframe. Aspect ratio 3:1 approximately 2172x724.
-Top header text precisely "MAKE IT YOUR RUN". Beneath it THREE equally sized columns. Column one: a torso-only olive tactical armored vest floating in inventory presentation, with no head, body or mannequin; the lower left quarter transitions into coherent green wireframe; exact label "NEW ARMOR". Column two: two small clean shoulder-up conceptual polygon character portraits side by side, blonde woman and dark-haired man in a simple suit, half materialized from muted green wireframe. They are generic conceptual illustrations representing alternate playable models, not new named characters or promised exact screenshots. Exact label "PLAYER MODELS". Column three: three restrained horizontal green configuration sliders in a grey-green rectangular frame with subtle varying knob positions; small meshes transition into solid frame, exact label "GAMEPLAY MODIFIERS". No labels or numbers inside sliders. Bottom narrow black strip, exact cyan text "CUSTOMIZE YOUR LOADOUT AND PLAYSTYLE."
-Keep sparse polished layout, balanced visual weights, exact legible English labels, flat plum background, quiet green lines, restrained period low-resolution textures. Do not include actual fake gameplay, guns, extra text, additional character figures, badges or stat changes. NO ornate gold, NO bright neon glow, NO modern rounded cards, NO gradient text, NO grunge overlays. The visual should belong to the same original PS1 purple inventory interface as the preceding feature panel and banner.
-```
+## Generation and revision history
+
+The initial two illustrations were made with the built-in image generation tool,
+one call per image. Their prompts requested a simple PS1-style dark plum menu,
+thin grey-green borders, cyan headings, ivory pixel labels and muted green
+wireframe transitions. The first prompt specified five illustrated categories:
+enemies, items, shops, magic and music, with the footer “CHOOSE YOUR OPTIONS.
+SHARE YOUR SEED.” The second specified armor, player portraits and three abstract
+configuration sliders, with the footer “CUSTOMIZE YOUR LOADOUT AND PLAYSTYLE.”
+
+The user then requested real in-game/project art. The current revision uses
+direct compositing rather than asking the generator to redraw those assets.
+Only the abstract slider motif from the first generated customization image is
+retained. All lettering was replaced with the original game's bitmap glyphs.
+
+Both final panels were visually inspected for readable English labels, source
+fidelity, clipping and consistency with the README banner. The imagery does not
+advertise boss randomization, debug loadouts or exhaustive gameplay validation.

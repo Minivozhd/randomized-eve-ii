@@ -571,9 +571,9 @@ static void testArmorCatalogue() {
     }
     require(threw, "Oversized inventory image accepted");
     threw = false;
-    palette.resize(1);
+    const std::vector<char> truncatedPalette{palette.front()};
     try {
-        validateArmorImage(texture, palette);
+        validateArmorImage(pe2::resources::copy(assets + "118mini.png.bin.compr"), truncatedPalette);
     } catch (const std::runtime_error &) {
         threw = true;
     }

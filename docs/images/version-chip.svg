@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="142" height="30" viewBox="0 0 142 30" role="img" aria-label="Version v1.3.0">
+  <rect x="1" y="1" width="140" height="28" rx="3" fill="#210b28" stroke="#747c6d" stroke-width="2"/>
+  <path d="M11 10h6v10h-6z" fill="#65cbd0"/>
+  <text x="28" y="20" fill="#eeeee2" font-family="Verdana,sans-serif" font-size="12" font-weight="bold">Version v1.3.0</text>
+</svg>

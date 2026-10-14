@@ -1,0 +1,20 @@
+# Imported targets preserve library directories and transitive linker options.
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(QRENCODE QUIET IMPORTED_TARGET libqrencode)
+endif()
+if(TARGET PkgConfig::QRENCODE)
+    add_library(PE2::Qrencode ALIAS PkgConfig::QRENCODE)
+else()
+    find_path(QRENCODE_INCLUDE_DIR NAMES qrencode.h)
+    find_library(QRENCODE_LIBRARY NAMES qrencode libqrencode)
+    include(FindPackageHandleStandardArgs)
+    find_package_handle_standard_args(Qrencode REQUIRED_VARS QRENCODE_INCLUDE_DIR QRENCODE_LIBRARY)
+    if(NOT Qrencode_FOUND)
+        message(FATAL_ERROR "Install libqrencode or specify CMAKE_PREFIX_PATH / a CMake toolchain file")
+    endif()
+    add_library(PE2::Qrencode UNKNOWN IMPORTED)
+    set_target_properties(PE2::Qrencode PROPERTIES
+        IMPORTED_LOCATION "${QRENCODE_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${QRENCODE_INCLUDE_DIR}")
+endif()

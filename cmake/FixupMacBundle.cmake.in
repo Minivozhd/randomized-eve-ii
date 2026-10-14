@@ -1,0 +1,14 @@
+include(BundleUtilities)
+set(bundle "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/pe2randomizer.app")
+fixup_bundle("${bundle}" "" "@PE2_FIXUP_DIRS@")
+find_program(CODESIGN_EXECUTABLE codesign REQUIRED)
+execute_process(COMMAND "${CODESIGN_EXECUTABLE}" --force --deep --sign - "${bundle}"
+    RESULT_VARIABLE result)
+if(NOT result EQUAL 0)
+    message(FATAL_ERROR "Ad-hoc signing of the local macOS app failed")
+endif()
+execute_process(COMMAND "${CODESIGN_EXECUTABLE}" --verify --deep --strict "${bundle}"
+    RESULT_VARIABLE verify_result)
+if(NOT verify_result EQUAL 0)
+    message(FATAL_ERROR "Signature verification of the installed macOS app failed")
+endif()

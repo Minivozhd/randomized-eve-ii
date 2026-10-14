@@ -1,0 +1,68 @@
+set(PE2_CORE_SOURCES
+    delivery/Manager.cpp
+    domain/armor/entities/Armor.cpp
+    domain/armor/usecases/ArmorRandomizer.cpp
+    domain/costume/entities/Costume.cpp
+    domain/costume/usecases/CostumeRandomizer.cpp
+    domain/costume/usecases/Portraits.cpp
+    domain/costume/usecases/MalePlayers.cpp
+    domain/encounter/entities/Encounter.cpp
+    domain/encounter/entities/Reward.cpp
+    domain/encounter/entities/RoomInfo.cpp
+    domain/enemy/entities/Enemy.cpp
+    domain/enemy/usecases/EnemyRandomizer.cpp
+    domain/enhancer/enemy/Enemy.cpp
+    domain/file/entities/PE2File.cpp
+    domain/file/usecases/FileUsecase.cpp
+    domain/game/entities/Level.cpp
+    domain/game/entities/Room.cpp
+    domain/game/entities/Stage.cpp
+    domain/item/entities/Item.cpp
+    domain/item/usecases/ItemRandomizer.cpp
+    domain/magic/entities/Magic.cpp
+    domain/magic/usecases/MagicRandomizer.cpp
+    domain/music/entities/Music.cpp
+    domain/music/usecases/MusicRandomizer.cpp
+    domain/randomizer/usecases/Randomizer.cpp
+    domain/rom/usecases/RomUsecase.cpp
+    utils/BitsReader.cpp
+    utils/BitsWriter.cpp
+    utils/Common.cpp
+    utils/FileWorks/FileWorks.cpp
+    utils/GeometryWorks/GeometryWorks.cpp
+    utils/VectorWorks/VectorWorks.cpp
+    utils/lzss/Compressor.cpp
+    utils/lzss/LZBuffer.cpp
+    utils/lzss/LZDict.cpp
+    utils/lzss/LZDictSeqDesc.cpp
+    utils/lzss/LZLink.cpp
+    ui/context/UIContext.cpp
+)
+
+set(PE2_UI_SOURCES
+    ui/shared/Colors.cpp
+    ui/shared/Fonts.cpp
+    ui/validator/DoubleValidator.cpp
+    ui/widgets/header/Header.cpp
+    ui/widgets/body/GeneralOptions.cpp
+    ui/widgets/body/dialog/AdvancedOptionsDialog.cpp
+    ui/widgets/body/dialog/EnemiesDialog.cpp
+    ui/widgets/body/dialog/ItemsDialog.cpp
+    ui/widgets/body/dialog/MagicDialog.cpp
+    ui/widgets/body/dialog/MusicDialog.cpp
+    ui/widgets/footer/Footer.cpp
+    ui/RandomizerFrame.cpp
+    ui/RandomizerPanel.cpp
+    ui/RandomizerThread.cpp
+)
+
+list(TRANSFORM PE2_CORE_SOURCES PREPEND "src/")
+list(TRANSFORM PE2_UI_SOURCES PREPEND "src/")
+list(APPEND PE2_CORE_SOURCES
+    src/resources/ArmorData.cpp
+    src/resources/EmbeddedResources.cpp
+    src/resources/LegacyData.cpp
+    src/resources/PlayersData.cpp
+    src/resources/PortraitsData.cpp
+    src/resources/WeaponVariantsData.cpp
+)

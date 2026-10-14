@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Randomized Eve II
+Comment=Randomize Parasite Eve II disc images
+Exec=pe2randomizer
+Icon=pe2randomizer
+Terminal=false
+Categories=Game;Utility;
+Keywords=Parasite;Eve;Randomizer;
+StartupNotify=true

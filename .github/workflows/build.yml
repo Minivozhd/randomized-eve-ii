@@ -1,0 +1,186 @@
+name: Build, test and release
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native:
+    name: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            platform: windows-x64
+          - os: macos-14
+            platform: macos-arm64
+          - os: macos-15-intel
+            platform: macos-x64
+          - os: ubuntu-24.04
+            platform: linux-x64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Read project version
+        id: version
+        shell: bash
+        run: |
+          version=$(sed -nE 's/^project\(pe2randomizer VERSION ([0-9.]+).*/\1/p' CMakeLists.txt)
+          test -n "$version"
+          if [ "$GITHUB_REF_TYPE" = tag ]; then test "$GITHUB_REF_NAME" = "v$version"; fi
+          echo "value=$version" >> "$GITHUB_OUTPUT"
+      - name: Install Windows dependencies
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@ec48f7c5447b3140e2b088413ae3a55687bccb6e # v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-pkgconf
+            mingw-w64-ucrt-x86_64-wxwidgets3.2-msw
+            mingw-w64-ucrt-x86_64-qrencode
+      - name: Build and test Windows
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: |
+          cmake --preset release -DPE2_WARNINGS_AS_ERRORS=ON -DPE2_BUILD_INTEGRATION_TESTS=ON
+          cmake --build --preset release --parallel 4
+          ctest --preset release
+          cmake --install build/release --prefix dist/windows --strip
+          mkdir -p dist/windows/bin/licenses
+          cp -R /ucrt64/share/licenses/. dist/windows/bin/licenses/
+      - name: Package and launch Windows application
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          $app = (Resolve-Path 'dist/windows/bin/pe2randomizer.exe').Path
+          $process = Start-Process -FilePath $app -WorkingDirectory $env:TEMP -PassThru
+          Start-Sleep -Seconds 8
+          if ($process.HasExited) { throw "Application exited during startup: $($process.ExitCode)" }
+          Stop-Process -Id $process.Id
+          New-Item -ItemType Directory -Force packages | Out-Null
+          Compress-Archive -Path dist/windows/bin/* -DestinationPath "packages/Randomized-Eve-II-v$env:VERSION-windows-x64.zip"
+      - name: Install macOS dependencies
+        if: runner.os == 'macOS'
+        run: brew install ninja wxwidgets qrencode
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libwxgtk3.2-dev libqrencode-dev pkg-config dpkg-dev xvfb
+      - name: Build and test Unix application
+        if: runner.os != 'Windows'
+        run: |
+          cmake --preset release -DPE2_WARNINGS_AS_ERRORS=ON -DPE2_BUILD_INTEGRATION_TESTS=ON
+          cmake --build --preset release --parallel 4
+          ctest --preset release
+      - name: Package and launch macOS application
+        if: runner.os == 'macOS'
+        env:
+          VERSION: ${{ steps.version.outputs.value }}
+          PLATFORM: ${{ matrix.platform }}
+        run: |
+          cmake --install build/release --prefix dist/macos --strip
+          license_dir="$PWD/dist/macos/pe2randomizer.app/Contents/Resources/licenses"
+          mkdir -p "$license_dir"
+          for formula in wxwidgets qrencode $(brew deps --union wxwidgets qrencode); do
+            prefix=$(brew --prefix "$formula")
+            mkdir -p "$license_dir/$formula"
+            while IFS= read -r source; do
+              relative="${source#"$prefix"/}"
+              mkdir -p "$license_dir/$formula/$(dirname "$relative")"
+              cp "$source" "$license_dir/$formula/$relative"
+            done < <(find -L "$prefix" -type f \( -iname '*license*' -o -iname 'copying*' -o -iname 'copyright*' -o -iname 'notice*' \))
+          done
+          codesign --force --deep --sign - dist/macos/pe2randomizer.app
+          codesign --verify --deep --strict dist/macos/pe2randomizer.app
+          app="$PWD/dist/macos/pe2randomizer.app/Contents/MacOS/pe2randomizer"
+          (cd "$RUNNER_TEMP"; "$app") &
+          pid=$!
+          sleep 8
+          kill -0 "$pid"
+          kill "$pid"
+          mkdir -p packages
+          ditto -c -k --sequesterRsrc --keepParent dist/macos/pe2randomizer.app "packages/Randomized-Eve-II-v${VERSION}-${PLATFORM}.zip"
+      - name: Package, install and launch Linux application
+        if: runner.os == 'Linux'
+        env:
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          cpack --config build/release/CPackConfig.cmake -G DEB -B dist
+          mkdir -p packages
+          cp "dist/pe2randomizer_${VERSION}_amd64.deb" "packages/Randomized-Eve-II-v${VERSION}-linux-x64.deb"
+          dpkg-deb -I packages/*.deb
+          sudo apt-get install -y ./packages/*.deb
+          cd "$RUNNER_TEMP"
+          set +e
+          timeout 8s xvfb-run -a /usr/bin/pe2randomizer
+          result=$?
+          set -e
+          test "$result" -eq 124
+      - name: Save packages
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: package-${{ matrix.platform }}
+          path: packages/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Save test diagnostics
+        if: failure()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: diagnostics-${{ matrix.platform }}
+          path: build/release/Testing/Temporary/*.log
+          if-no-files-found: ignore
+  release:
+    name: Publish tagged release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: native
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          pattern: package-*
+          path: packages
+          merge-multiple: true
+      - name: Publish all tested packages together
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          test "$(find packages -maxdepth 1 -type f | wc -l)" -eq 4
+          (cd packages; sha256sum * > SHA256SUMS.txt)
+          cp README.txt packages/README.txt
+          cat > "$RUNNER_TEMP/release-notes.md" <<NOTES
+          Native builds of Randomized Eve II $TAG for Windows x64, macOS Apple Silicon and Intel, and Linux x64 (Ubuntu 24.04).
+
+          - Windows: extract the entire ZIP and run pe2randomizer.exe.
+          - macOS: extract the matching ZIP and move the app to Applications. The app is ad-hoc signed, not Apple-notarized; see the README for first-launch instructions.
+          - Linux: install the .deb with apt so runtime dependencies are installed too.
+
+          [Download page](https://minivozhd.github.io/randomized-eve-ii/) · [Instructions and changelog](https://github.com/$REPO/blob/$TAG/README.txt) · [Known issues](https://github.com/$REPO/blob/$TAG/docs/KNOWN_ISSUES.md)
+
+          Requires your own original USA BIN/CUE images for both discs. No game discs or BIOS are included. See SHA256SUMS.txt to verify downloads.
+          NOTES
+          gh release create "$TAG" packages/* --repo "$REPO" --verify-tag --title "Randomized Eve II $TAG" --notes-file "$RUNNER_TEMP/release-notes.md"

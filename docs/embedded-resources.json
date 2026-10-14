@@ -1,0 +1,1058 @@
+{
+  "binary/data.bin": {
+    "size": 464144,
+    "sha256": "38b2da73570121eba29c2a162169e662c455565d63237ffe09e34e634de1e373"
+  },
+  "binary/dummy_monster.pe2e.decompr": {
+    "size": 30170,
+    "sha256": "b2a9543adf6588f0230f8ea103e2712b6f101d35bba4ff98f4e960b20570b525"
+  },
+  "binary/golem_sound_data.pe2e": {
+    "size": 368,
+    "sha256": "cd54d6ba8d5f4fd422909498f7d3a977ab3c6eb28b13abd184ff840f0ed81634"
+  },
+  "game/armor/001mini.png.bin.compr": {
+    "size": 3920,
+    "sha256": "64ef7707154dd707c6d5129b4ffa58a8c8537a023eb40ad585810700c1f41a71"
+  },
+  "game/armor/001mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "6cdf495b5afd9312d188cc2f60d278cd68a7d2fe804bf3b00a8c2b1706ebfa0d"
+  },
+  "game/armor/002mini.png.bin.compr": {
+    "size": 3596,
+    "sha256": "da2f5ec464739e601e7956fb445dc4634e324110b04a85b0716fcfcec68cecfe"
+  },
+  "game/armor/002mini.png.pal.compr": {
+    "size": 112,
+    "sha256": "724b9b435a846887f87bff757d781b0de1f2ddc4fd7a4bcaa0c4e674064f9d16"
+  },
+  "game/armor/003mini.png.bin.compr": {
+    "size": 3476,
+    "sha256": "231b1ed5c45052f6ffef3b4d6be3fd6544c9bed6c4bbca77bfd5469b088cda4e"
+  },
+  "game/armor/003mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "c4c2fedff0a361042972829c96e4df982c2e9fdec22bf35691d6c60aa12771c3"
+  },
+  "game/armor/004mini.png.bin.compr": {
+    "size": 3696,
+    "sha256": "9fd8856bae46cea984acf90b3674eb2ef5e882051be24ef29928d394c9b05307"
+  },
+  "game/armor/004mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "397d2d3bc2ec9177240713f16c40ea0f97f788054bac8642316ec0f892091476"
+  },
+  "game/armor/005mini.png.bin.compr": {
+    "size": 4052,
+    "sha256": "072f8e74d2f8c32b048bc184da89696cc9a36ababb63bc6a8257bc6d706508f8"
+  },
+  "game/armor/005mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "5b8dc09711d945e2676380a0f107d9223164d6843093e3bca472fbfb92a7b49d"
+  },
+  "game/armor/006mini.png.bin.compr": {
+    "size": 4808,
+    "sha256": "3f191b11e80f36ad50f1f2826c778c152324265bcde435adfb3828c143a87edf"
+  },
+  "game/armor/006mini.png.pal.compr": {
+    "size": 100,
+    "sha256": "f6bd3e78ec288f173ee91315997d6cf45b735eb01c6e0acd40e7646785fb5580"
+  },
+  "game/armor/007mini.png.bin.compr": {
+    "size": 3760,
+    "sha256": "db8a9196600d70ef6c89b348230c1061a0bd73128316ddce9820bf7f1da3dbd4"
+  },
+  "game/armor/007mini.png.pal.compr": {
+    "size": 104,
+    "sha256": "fd1de4e0852a74b345232d92e8daafd2817db4d438c453b1d86558a1e4295c8a"
+  },
+  "game/armor/008mini.png.bin.compr": {
+    "size": 3064,
+    "sha256": "dfdbadd09f000b6fc91443a78f64fed9e1ecd40b4eee8c7b565ec61ab7ac2ddd"
+  },
+  "game/armor/008mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "1776fc857abde23134ea07a0f31670eac94a87b2e8fa40325113b287b7d1d2b8"
+  },
+  "game/armor/009mini.png.bin.compr": {
+    "size": 4148,
+    "sha256": "09f3ead4cd5b65860e1b62589cf42ad9f91854214eedbbca88734bed78a842f1"
+  },
+  "game/armor/009mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "e1ea57101217b6c185f69a8db20d010617f28d3f5c1a69ed5a46e7cc06e55f2f"
+  },
+  "game/armor/010mini.png.bin.compr": {
+    "size": 3356,
+    "sha256": "342fce684ee6de94203e061b432cff47fdac5c6b3d4a323df74f8790abe3c1f4"
+  },
+  "game/armor/010mini.png.pal.compr": {
+    "size": 124,
+    "sha256": "b8087612069e4351f41ff0da6b487f14cb53cb5e1f9a791d8a2f4e6522f307ab"
+  },
+  "game/armor/011mini.png.bin.compr": {
+    "size": 3780,
+    "sha256": "3c25fea576a642ab45b804acd4ee2f494aef2f219f977da8e81931819146bfe8"
+  },
+  "game/armor/011mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "1463ea453f621fac06f99df22073816265c82b0535b0bdfcfda0d65d35013ed3"
+  },
+  "game/armor/012mini.png.bin.compr": {
+    "size": 3024,
+    "sha256": "2c689bd646a2cbfd2144bf9707a0c8913701ca963ffd4aab8889b44fcaef5eeb"
+  },
+  "game/armor/012mini.png.pal.compr": {
+    "size": 160,
+    "sha256": "8100cf697ba740e9718cd4180f468ddd451ef75dd09906d3aa2396be6d0b7fda"
+  },
+  "game/armor/013mini.png.bin.compr": {
+    "size": 3336,
+    "sha256": "9a8dafa63f286e3f0f82bcd9913894c2973fdbaddaff11839d6743c22325eeae"
+  },
+  "game/armor/013mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "83c15e256a964b22c7201315ac24ab515c69854390dab337f969344389900345"
+  },
+  "game/armor/014mini.png.bin.compr": {
+    "size": 4660,
+    "sha256": "d036e95161939e15d6e88d3030112875962cebe49f6fbef8c77e0022ba12a1a0"
+  },
+  "game/armor/014mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "637f30b0013da9d9582a552019c6ce8f6cbe0b8e6e360eb08a049daf37ae2e5c"
+  },
+  "game/armor/015mini.png.bin.compr": {
+    "size": 4848,
+    "sha256": "a703c84045b732c3e90e739ea4d0535fa5e06bbd8e0667b49fc706bc53d0809a"
+  },
+  "game/armor/015mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "eb805bde812e72f0996c6be95fb4abaa8c07fe99322bffe52773cf1f61395f0e"
+  },
+  "game/armor/016mini.png.bin.compr": {
+    "size": 4688,
+    "sha256": "58eb54454945a4e57de6dfa69cae062d9b349d86919f5e7607bcbce69c9dc14e"
+  },
+  "game/armor/016mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "f430dc5017abcd3d12e9184dd022ef5a9e1c19e1a004c3a86b1ba3ac3918009f"
+  },
+  "game/armor/017mini.png.bin.compr": {
+    "size": 3772,
+    "sha256": "02af323ca4fbfa44d431015c10493e386d1a4b2f3e90cd070b6bad89f5f50ff3"
+  },
+  "game/armor/017mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "09fe161243f13a8f685a7df8c2f2285a87daaba81ff6ef19cc0c164f9c10400c"
+  },
+  "game/armor/018mini.png.bin.compr": {
+    "size": 3728,
+    "sha256": "7b8f90178b250f8f7e6d8a09663ed35a50a9636ee3c94ddcecbdb3e7ec9b2698"
+  },
+  "game/armor/018mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "e614d4c07e1893973ca025f25faa036627ec6f8f5ade594c8517cd557e6981f8"
+  },
+  "game/armor/019mini.png.bin.compr": {
+    "size": 4580,
+    "sha256": "351a946f00f3f9bf449ccd82df65dc26f81c71310337153cd36bfc36375019d7"
+  },
+  "game/armor/019mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "c924d4b776375318208d42f27b2840b529fd6f21a70d66e70884638aa8120d51"
+  },
+  "game/armor/020mini.png.bin.compr": {
+    "size": 3924,
+    "sha256": "075bf94fd055eafd3ae6cc7fa50bb3189df4bfcd730dc36b0fbd1d924e0407c8"
+  },
+  "game/armor/020mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "32ea968a69ab39df57ffd9df52a8087e6aab874c6dde03bee78a76270d63d592"
+  },
+  "game/armor/021mini.png.bin.compr": {
+    "size": 4244,
+    "sha256": "523088b4b6731c54012609952942864270283ec5f96ea14b92bb848b27248b4e"
+  },
+  "game/armor/021mini.png.pal.compr": {
+    "size": 156,
+    "sha256": "f25860e5125e6e7a7ae23c77cb76720b8552da1c957aca7d486a75597251c990"
+  },
+  "game/armor/022mini.png.bin.compr": {
+    "size": 3968,
+    "sha256": "bfb68d01b51ddf6f593c0fd063c16bf209c4d346a6622e8f30744d836b23e5bc"
+  },
+  "game/armor/022mini.png.pal.compr": {
+    "size": 164,
+    "sha256": "371e33cfa60d94d4e18c0fa220f8d0bf192dbd0b60ff197fcb52de94fd4eb972"
+  },
+  "game/armor/023mini.png.bin.compr": {
+    "size": 3804,
+    "sha256": "fa762e1cc43d41bdb4ebfaea56e8ae71fd419d07d5d6229c60ad4355a037c948"
+  },
+  "game/armor/023mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "d665cdd99ad9f303406cb574ac43d588cbc1e44ec969c2ca71d5965ac27f3a55"
+  },
+  "game/armor/024mini.png.bin.compr": {
+    "size": 4164,
+    "sha256": "5d7f32e77dcb550c88a019036d97329a2ef9327fe006f45d286dadd3831e1637"
+  },
+  "game/armor/024mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "5e66328e4251b86e6d46d3bd4097def65e4f7c0231e9afc9209b2930c305eb06"
+  },
+  "game/armor/025mini.png.bin.compr": {
+    "size": 4056,
+    "sha256": "00ae6bb1cbea552649123eaafbd85387cff352f2ce9066d2ddad5a7cff014093"
+  },
+  "game/armor/025mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "59b37cb409cbadb2ac6cd2b08450c8268d81bb085cbba91c3d629a276c7fd1be"
+  },
+  "game/armor/026mini.png.bin.compr": {
+    "size": 4964,
+    "sha256": "79a538a2bf87cdaa8fd6ee79750323a80daf062ea772680117c8549a9f98bf86"
+  },
+  "game/armor/026mini.png.pal.compr": {
+    "size": 168,
+    "sha256": "348d9e8790517355ff26739f25d6f6460130ecb807129831d50a96a9fdf81c80"
+  },
+  "game/armor/027mini.png.bin.compr": {
+    "size": 3912,
+    "sha256": "ff93638c0b5e0db45419b412dff6daca42b4578a43cca0936f3444addf0f3411"
+  },
+  "game/armor/027mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "853a2f9b90c44cc873bd5079ab9cffa5426bcd3cfd94e51d2c8b10029c70e515"
+  },
+  "game/armor/028mini.png.bin.compr": {
+    "size": 5776,
+    "sha256": "b351c46f9689002067d6388ae50e86aac81561b9f2452f632c79c2beb6a9403d"
+  },
+  "game/armor/028mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "37064c50dae8842785d2ef8bb6ab49ab7097fd768459f902d74e92779738ce0d"
+  },
+  "game/armor/029mini.png.bin.compr": {
+    "size": 4356,
+    "sha256": "8da72874cbf8441db3975f6e380efede5e7060192eb9106b8034f8b1e004d61b"
+  },
+  "game/armor/029mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "5fc1a20a77341cc5ff1e54a8e9de6c0bbe92c9314cf18205a40809dbdfbe88fd"
+  },
+  "game/armor/030mini.png.bin.compr": {
+    "size": 3416,
+    "sha256": "c700db1dc3ffec0bdd4246670657511f859df930925e8a7dd314c5f7b3c74aa8"
+  },
+  "game/armor/030mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "a09c3be2683afc259c0a6fbb1287ff92f13e1149ff35d289440b17fd506902a8"
+  },
+  "game/armor/033mini.png.bin.compr": {
+    "size": 3920,
+    "sha256": "866838c97abc372aa5ca5db85e80d8375a54f4eee50898d5d54032bead9a295a"
+  },
+  "game/armor/033mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "db882c4eda8d2728b95087f2d979e8dab8102faf7394100a14ff2211e1aa1fb8"
+  },
+  "game/armor/034mini.png.bin.compr": {
+    "size": 3604,
+    "sha256": "f5fefb048a1cba1327a095f397af770fbfe692d47e22377b2e359360ca74267a"
+  },
+  "game/armor/034mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "3a768c61b640b62cd292b5500a081d2c15f5ab4ee0527d3e99ad4360d817a0f8"
+  },
+  "game/armor/035mini.png.bin.compr": {
+    "size": 4188,
+    "sha256": "49133837d2add7eb97d0c3b490be87e85e5f02e1c51469a442b51b31c54ad9ac"
+  },
+  "game/armor/035mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "214895d7a392e25c49917ea6cbed36d9e6cde9f5264cfbfeb6f870b5597120de"
+  },
+  "game/armor/036mini.png.bin.compr": {
+    "size": 3952,
+    "sha256": "1da1a0c5ed00bea0d53afeaa0eccf46d89d8bf29c74e992ea1d135a0f55ec954"
+  },
+  "game/armor/036mini.png.pal.compr": {
+    "size": 124,
+    "sha256": "3c738236923e33908ae230afa0312abc518050f324ba82b6aaa7492807276dc0"
+  },
+  "game/armor/037mini.png.bin.compr": {
+    "size": 4148,
+    "sha256": "c7a69915cf3b08096554e56a46913cd05ae6eb0d911e19ff6b8292b544106317"
+  },
+  "game/armor/037mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "64a3767f7aa55faa759dcf19226962dd31275a16602bc996cde0bed153f75afe"
+  },
+  "game/armor/038mini.png.bin.compr": {
+    "size": 4692,
+    "sha256": "24437ad8ff777a3e03ef0820b5a998bbc7271e9a0914e29dc4509a239dc19db5"
+  },
+  "game/armor/038mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "95b69657454fd7ee4d7c579fcaa156c585513a9508ef84482ea283ebbf127827"
+  },
+  "game/armor/039mini.png.bin.compr": {
+    "size": 3644,
+    "sha256": "bcda32ac88ec136ab11b248d75cf22649b177f865dcab2595c42aa0c0f01f544"
+  },
+  "game/armor/039mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "a849b255675dcb7dfd6d97a6e56aaed1456f503e048fd2d5f50f4747ba71dafb"
+  },
+  "game/armor/040mini.png.bin.compr": {
+    "size": 4396,
+    "sha256": "89517a4e831f73021cb735d4f54fde4abfa5c822fb690ee0ed66593476f3027d"
+  },
+  "game/armor/040mini.png.pal.compr": {
+    "size": 112,
+    "sha256": "45bd4888d66d4b8b2d4deb786758f46e2c62386a1bfa56c322eb868b207d5220"
+  },
+  "game/armor/041mini.png.bin.compr": {
+    "size": 4180,
+    "sha256": "d18d4f67c5d05df5e17e69ebac15f6d78808e4b90a445499bd21026ca380dfbe"
+  },
+  "game/armor/041mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "9abba05554e0dd3b1d1c1592e45a1fbcf92d3504d53f05422f07bf5c81f954e1"
+  },
+  "game/armor/042mini.png.bin.compr": {
+    "size": 4380,
+    "sha256": "1c4a3fa75d123e0af93086abf8dcd1787d901bd42fe2396c74ce27caf2d25cea"
+  },
+  "game/armor/042mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "4fbf62c46ee548c41241a38cb0f5307724fdf8e1118faf7f179adb97531d13b4"
+  },
+  "game/armor/043mini.png.bin.compr": {
+    "size": 3900,
+    "sha256": "e4c7983e3d61ad7c437659976d257e1f132505216dd4a3f4ee9c92b22290db42"
+  },
+  "game/armor/043mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "01fbdbdeb9c098cff42b9af978ca88b98ac0dadfd0861713651f62c4c6bd0632"
+  },
+  "game/armor/044mini.png.bin.compr": {
+    "size": 4676,
+    "sha256": "2d166c9b1199f3894aeaf884656f6027b0120233deb54eb6bb1aa6a5cb10c1b0"
+  },
+  "game/armor/044mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "0319e96a189c2472fb049998f929f555848287cf4650cfb557480e51d9e43892"
+  },
+  "game/armor/045mini.png.bin.compr": {
+    "size": 3548,
+    "sha256": "1c826769d6697a23497433c5e045937882a6dd3b36bb51849368b9454c57f831"
+  },
+  "game/armor/045mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "0039dd47b901429d54fe9cfd57403fc3e86ed041c55d49479db92c61eff21c84"
+  },
+  "game/armor/046mini.png.bin.compr": {
+    "size": 3812,
+    "sha256": "aecf27b898e6a11759acd536e444701b9d4f0bd57c2178fbc718fede70bd3e24"
+  },
+  "game/armor/046mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "8b7ee7730aada5f18ba11940150568a8cd95d882b13556091ad897cc269bc5c0"
+  },
+  "game/armor/047mini.png.bin.compr": {
+    "size": 4092,
+    "sha256": "d1ef04877e2e056569f804534d0d57989a3d1b8952c9e58640a34e4bbfd0fe00"
+  },
+  "game/armor/047mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "9d292280516ada02e91acde2c549be1e661cf941c0dde3eddb368e1d39ecf7e0"
+  },
+  "game/armor/048mini.png.bin.compr": {
+    "size": 4816,
+    "sha256": "265f9c0edfaa0966b4eb723f2fc0b5dc4b3dccc95c57e36b38e318c0d2e4d85c"
+  },
+  "game/armor/048mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "b03fedbe18c81527903d956941384be6587723d093fdadf1326514e7b3583258"
+  },
+  "game/armor/049mini.png.bin.compr": {
+    "size": 3396,
+    "sha256": "21b97fbdbabc20dd76606f01cbe08051e4faf1c765c7eb8ce71270763dd2e18b"
+  },
+  "game/armor/049mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "ce89a135dabf1e29a790a411469672ceec974c6a717934ba547e013610b32259"
+  },
+  "game/armor/050mini.png.bin.compr": {
+    "size": 4364,
+    "sha256": "ecf49221db3cfd2065c97939bd0d3c84b74963282e62af3c4e4f4af51fc07b76"
+  },
+  "game/armor/050mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "9c4ac1bd0f61fad01b66f2f811c5dfa2751e7e8260390ce65d2a8f26b8c57505"
+  },
+  "game/armor/051mini.png.bin.compr": {
+    "size": 4908,
+    "sha256": "09ae120c4539cccff3c5162b205d5948760185d48c4c74ad20a54edab609ed67"
+  },
+  "game/armor/051mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "259758750204f12697ae5ce9c2d02d725eea0fa788bb6d93590f68fa8482d417"
+  },
+  "game/armor/052mini.png.bin.compr": {
+    "size": 4576,
+    "sha256": "2b33f028524f1e7b926e6f286297a106ac5d40aeb19c80ec72f66288de67320a"
+  },
+  "game/armor/052mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "0761dad8f22d9dfce30933488b600c5b7b7e9ab0f7570312ee1748ad2a7fc5a3"
+  },
+  "game/armor/053mini.png.bin.compr": {
+    "size": 4248,
+    "sha256": "3f2a154fb77ce37ed88c484be36a301884c6c66f44ebc5961844ae0d90a99481"
+  },
+  "game/armor/053mini.png.pal.compr": {
+    "size": 124,
+    "sha256": "b8dfac13a2082cc6b527bb97f367bfb4ee73c3cc3375e94bf81964a3f6b3dd58"
+  },
+  "game/armor/054mini.png.bin.compr": {
+    "size": 4180,
+    "sha256": "3153691901b07f6845ea80e579e603b832653ba058c77c0d043b8e034d97bb6f"
+  },
+  "game/armor/054mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "dea93dd09e787456e53ebd507e55d177c62291bb56cc1b6a59b6c0e13019bc97"
+  },
+  "game/armor/055mini.png.bin.compr": {
+    "size": 4080,
+    "sha256": "5dfbacd4373f2f82f86f1c18dbd56f086eef518b5eb41b493df48aebbff32f02"
+  },
+  "game/armor/055mini.png.pal.compr": {
+    "size": 108,
+    "sha256": "c596d0b00f49a99a2d3102c8f08ee06efa846fd43c855f66cc348b1caaf1436d"
+  },
+  "game/armor/056mini.png.bin.compr": {
+    "size": 3852,
+    "sha256": "625ff23348f73846bebe334b8666e809524b8910aaf6a345c8bbc5178ceb305f"
+  },
+  "game/armor/056mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "64fd6bca76022d14c512bf63dcd4b58ebac4d8f86d80c72ba17e7a3075548dad"
+  },
+  "game/armor/057mini.png.bin.compr": {
+    "size": 3788,
+    "sha256": "57e0ba76f08d020ddf5706ae7aa7e102c05da9de26742ad1a53b12e4b0fbca15"
+  },
+  "game/armor/057mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "d8b56d30f5fa715b787073c55fea6cc9ed434bfdece4c6d09bfbe7f9dac69422"
+  },
+  "game/armor/058mini.png.bin.compr": {
+    "size": 5391,
+    "sha256": "5936539462acac1779a2beed0edb8efa1465bd662bba2ab84bfb94a580227c4e"
+  },
+  "game/armor/058mini.png.pal.compr": {
+    "size": 100,
+    "sha256": "ad23d13853d78e5fc1c7262bf450789d2d4d122134ac9efcec84870cef7b6911"
+  },
+  "game/armor/059mini.png.bin.compr": {
+    "size": 3560,
+    "sha256": "07c507acbeca8e1e2e50b3b7497a1ffff0d948296eea6261fdb5ddcd5de36dad"
+  },
+  "game/armor/059mini.png.pal.compr": {
+    "size": 168,
+    "sha256": "e679fa71549be27014814ff51c01c091a308da3626ebeb582caaeefb01c4ec79"
+  },
+  "game/armor/060mini.png.bin.compr": {
+    "size": 4056,
+    "sha256": "1dc548fed49a789faa689aa2983915df7ec55ffa59cc8728c3493b63fdd45591"
+  },
+  "game/armor/060mini.png.pal.compr": {
+    "size": 156,
+    "sha256": "dc998ff8d18c2a6ef63eca7f4810b43122f9c273e1fe38f8d37dd7e451b0a6f9"
+  },
+  "game/armor/061mini.png.bin.compr": {
+    "size": 3996,
+    "sha256": "da4d3efb79e8e67c3d5102c0d3ed65e6615d2d4b6aedccd607478fa2366ef3a3"
+  },
+  "game/armor/061mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "2178538a05538039b1eec8bb471fc23f96541d79e8a1335865aa4d07b414875f"
+  },
+  "game/armor/062mini.png.bin.compr": {
+    "size": 3916,
+    "sha256": "1e20626aa199663b3381479e221c1d376b9406f1874ab6202edb9aeddb87925e"
+  },
+  "game/armor/062mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "355acc509fb515c2c8213f76784d1e04022f83f02fec945ebbe2b1a81757daf0"
+  },
+  "game/armor/063mini.png.bin.compr": {
+    "size": 3252,
+    "sha256": "b22c0acd92d3a0aca392fd3a7d97a84bf092c8e64fc021f215c6920e1836aaf1"
+  },
+  "game/armor/063mini.png.pal.compr": {
+    "size": 124,
+    "sha256": "c3898f7a0c3e9a3e10d78c7329126851d6aebbcb0a9761141a9a3bf56e2133ab"
+  },
+  "game/armor/064mini.png.bin.compr": {
+    "size": 3612,
+    "sha256": "baae5b535889d2a05d4fe10028f1921e4bd911d4427166d4986eb2a77f8d6062"
+  },
+  "game/armor/064mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "f82280c27a34f10649ac732bed50e30ff26ffacd3c97fe284e1f53413518fff0"
+  },
+  "game/armor/065mini.png.bin.compr": {
+    "size": 3956,
+    "sha256": "61d3bf1e58c311164c97ae14ffb753c27ee18631af90595e92dd51399571ece9"
+  },
+  "game/armor/065mini.png.pal.compr": {
+    "size": 96,
+    "sha256": "f7de087d56fb19ab79c234bdf8618af65c9958910adaaf3e301430f1cb38f167"
+  },
+  "game/armor/066mini.png.bin.compr": {
+    "size": 3660,
+    "sha256": "38b7ae27827bae9e8eba2ae7cc47a127fb3fbd0f3a72d901255b15e4165e6cbf"
+  },
+  "game/armor/066mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "e0146f162b5b6b597310758f441216de1522881f5a76e231634131a6c99c0fe0"
+  },
+  "game/armor/067mini.png.bin.compr": {
+    "size": 4108,
+    "sha256": "4456408a59520f9115d849bcdea65d22575327a008f60d69270b683270f00dda"
+  },
+  "game/armor/067mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "63b5c1f3f986b2c0991fbb3da56ec7c60f0904b48cccd494e0efa9e619611ede"
+  },
+  "game/armor/068mini.png.bin.compr": {
+    "size": 4000,
+    "sha256": "0d97b96ebdbc8c91758578894701aa3dfc489292fa03a52cd51cebf04b0b563b"
+  },
+  "game/armor/068mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "9d996e26ab62350e3d22a486acc9fb40097a7350beaf0101ce116daa892d5053"
+  },
+  "game/armor/069mini.png.bin.compr": {
+    "size": 3332,
+    "sha256": "cc38c31cb7cf8ca2ed60e0e757215950c86064b722afeb9b99c4ca71bc779477"
+  },
+  "game/armor/069mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "0733819867290e2593285e05c6a68044dc6bd8827079cb5fe32de60929263095"
+  },
+  "game/armor/070mini.png.bin.compr": {
+    "size": 4188,
+    "sha256": "edc5c685d4e5980ff76a6991f1fc26d38950a1e766cb76cee7c536993f0180ad"
+  },
+  "game/armor/070mini.png.pal.compr": {
+    "size": 160,
+    "sha256": "a4e98113b54a6741bd5e7eca7fa2e6df491494481f4664da55a5fb02f6a0b643"
+  },
+  "game/armor/071mini.png.bin.compr": {
+    "size": 4816,
+    "sha256": "b2a1c54ea4f35eb184e446f0fb55d7c74a46f51ba34b5ade3015861b72b5de68"
+  },
+  "game/armor/071mini.png.pal.compr": {
+    "size": 92,
+    "sha256": "d3122ff1e49fc05018198638c3a588cd18043c277a3831903289c9c0dfb8f928"
+  },
+  "game/armor/072mini.png.bin.compr": {
+    "size": 3880,
+    "sha256": "d0308473d6fc24fb5202e3f0e1c5f3cd9e25a0084b923bd250dc6aa1058a112b"
+  },
+  "game/armor/072mini.png.pal.compr": {
+    "size": 164,
+    "sha256": "8296d5546b284afc91838090af52a6b0121d454e4b21fa80978a2a1edb2277d0"
+  },
+  "game/armor/073mini.png.bin.compr": {
+    "size": 3264,
+    "sha256": "de0a40f3e5ef92a8c516469472014f9505824e6b3454757318e78f04330d53f2"
+  },
+  "game/armor/073mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "423b9bfb796833d46d91ed647e683749e2c413442625270b4ad37b28cd693477"
+  },
+  "game/armor/074mini.png.bin.compr": {
+    "size": 4052,
+    "sha256": "2e33b5ec86ebb0f40e4325ed001509d5770bf630b0296adcb2aef18ec5e16102"
+  },
+  "game/armor/074mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "a047743963cba986da662a05bc937a9088a3f738a0cfc9c6aad45d88a5c78589"
+  },
+  "game/armor/075mini.png.bin.compr": {
+    "size": 4220,
+    "sha256": "18a9db27be29981ccb72b482948703fb5710e71a337fcaa795fead5ed9cfe3aa"
+  },
+  "game/armor/075mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "d60ed814a2178c38e56d32ebfe4a47fedae366876a87207ba67359176b7bb291"
+  },
+  "game/armor/076mini.png.bin.compr": {
+    "size": 4600,
+    "sha256": "195720cfdf3bb2eebd535a95bf4152b7de1e082b446492febefa8f32d0c3937d"
+  },
+  "game/armor/076mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "5df03d7be9248fbd7c2525a6abe6b4a80c007518921a04170965f54d9b3c4f7d"
+  },
+  "game/armor/077mini.png.bin.compr": {
+    "size": 4328,
+    "sha256": "f2804f457ceb170def2004beed4719786f7a2a175fef8d82e252ac0c228d89cd"
+  },
+  "game/armor/077mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "1f88a3fa777d633f009b4a28be5d56bb8daecff89e3584e1ed63ea22fda4f2f3"
+  },
+  "game/armor/078mini.png.bin.compr": {
+    "size": 3204,
+    "sha256": "0651e2f1dfaf6fb4bf2f11201b24446b6e576cdddc32470e6a1c5d971800f0bd"
+  },
+  "game/armor/078mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "53f71ade58300af888c1d9c1dcfbe129ea1be41e05cf657cb1b947a90da38985"
+  },
+  "game/armor/079mini.png.bin.compr": {
+    "size": 3396,
+    "sha256": "48d1a45efac44342b63e4afb88216a3c6e0f04cf2e6d04f9425763ba6f8e4693"
+  },
+  "game/armor/079mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "7beda61f5f8964e105798929e8c6259c16b5a1d79767e79af308bb6653446ac7"
+  },
+  "game/armor/080mini.png.bin.compr": {
+    "size": 3444,
+    "sha256": "1d8671382c5dc0ce343fb62c758011a9f1877ab26359d05c788931a710706975"
+  },
+  "game/armor/080mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "a072f30b403bea27582cba50ea8d0d3b9329f9ae8036e2b0a60d08537a424e5a"
+  },
+  "game/armor/081mini.png.bin.compr": {
+    "size": 3596,
+    "sha256": "0c36ba12830639592d9d6e872460f34f96be37522b9c62e6c1de57f31127c78a"
+  },
+  "game/armor/081mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "d5bb24a53dbf692fcc93914bbbe6f8dfb07f253b292ae066f1d19fada822be93"
+  },
+  "game/armor/082mini.png.bin.compr": {
+    "size": 4084,
+    "sha256": "38937400b906ea9f497bd2ad4700de250862f66ca4f6e3db95869c6a054b4acb"
+  },
+  "game/armor/082mini.png.pal.compr": {
+    "size": 152,
+    "sha256": "36787089566aee794f0104f0426a11137c423a89fe62c57aea5b2c4b8f9948d0"
+  },
+  "game/armor/083mini.png.bin.compr": {
+    "size": 4032,
+    "sha256": "16162a83d6a944baa7686cf5359b2bce40f355e1d2700d16b7d815bb8697c38f"
+  },
+  "game/armor/083mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "908c65e335e0d0d20a308434544d79a727c7230d4e6c076fbef3ed90533bae91"
+  },
+  "game/armor/084mini.png.bin.compr": {
+    "size": 4904,
+    "sha256": "e9d51686616ef9eb5090fa68e5f1ee8c57e9239d5e4469673ecb5e3f39920bb1"
+  },
+  "game/armor/084mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "fbfbdcd70d5022cac81bcde02b3a2db482bd45cd5499ab3e5fe4c39cb39b4b1c"
+  },
+  "game/armor/085mini.png.bin.compr": {
+    "size": 3668,
+    "sha256": "f8b2fb9dedded96c4255a8661a9be4d53c3a91a8199ef278227342894e2bfce9"
+  },
+  "game/armor/085mini.png.pal.compr": {
+    "size": 120,
+    "sha256": "4ae1e917130eb6ad040fe9088ceed81ef80d2891f810847fc52dde8586fdddd6"
+  },
+  "game/armor/086mini.png.bin.compr": {
+    "size": 3796,
+    "sha256": "30183b15d1d67e26e153c38e246ce3f095d1ae606b42d87bd9f570e23aca4430"
+  },
+  "game/armor/086mini.png.pal.compr": {
+    "size": 104,
+    "sha256": "f97ee1fd148a25c178af9401faad618c1f3b3a9449affae65abdaf0c94ed839d"
+  },
+  "game/armor/087mini.png.bin.compr": {
+    "size": 3312,
+    "sha256": "8a10843c1cf4d5e0d320294076ee4b65737497db0937b58d7a15d213cf2f79f8"
+  },
+  "game/armor/087mini.png.pal.compr": {
+    "size": 168,
+    "sha256": "520bd51c236c0f0f7552d72a396b9753f80fea6f5e401ab0b5aa7b75d6fc15fd"
+  },
+  "game/armor/088mini.png.bin.compr": {
+    "size": 3980,
+    "sha256": "286d01acbed3250cba46a74f8953b04e4abbe04973a9db28b59f20cc04045ae3"
+  },
+  "game/armor/088mini.png.pal.compr": {
+    "size": 144,
+    "sha256": "711f34132fe908a7a250b66cb52683344d995286437453b8bb7f8ab670bfc862"
+  },
+  "game/armor/089mini.png.bin.compr": {
+    "size": 4104,
+    "sha256": "662d258cff7caf9064b48210847f9adab8fad4081f0d0c96135522485167103e"
+  },
+  "game/armor/089mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "701ecf9ecf1076740136dfcb8b15077d3220afd8e1c0e9267dbd03c9481df11f"
+  },
+  "game/armor/090mini.png.bin.compr": {
+    "size": 3508,
+    "sha256": "8dbbecaff565d59665f6115df089a343f5b748bcb0b5638b35223e1a14e2e406"
+  },
+  "game/armor/090mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "4968ceef91599bc9381bd640ded3d29bc8b02b5ca2a14c14e4aed7bb9a75747e"
+  },
+  "game/armor/091mini.png.bin.compr": {
+    "size": 3920,
+    "sha256": "e0ccd95ca3f439ee61edb286cfaacc86133a3c3145e854acaf3ca674831e9e64"
+  },
+  "game/armor/091mini.png.pal.compr": {
+    "size": 160,
+    "sha256": "07cdd6a189671d956a8e75e51332b270e950f77c82733cf80a82f1e244f2e18d"
+  },
+  "game/armor/092mini.png.bin.compr": {
+    "size": 3596,
+    "sha256": "099083235dae07ea68e866026b1833f7cf1cb3a951d479cf121b66ab66ed9a7e"
+  },
+  "game/armor/092mini.png.pal.compr": {
+    "size": 136,
+    "sha256": "e2fdb1810dd911d00895b5893fdc6ff7bd35ef812c763382ce66e211cda4c00e"
+  },
+  "game/armor/093mini.png.bin.compr": {
+    "size": 4028,
+    "sha256": "9440ac4215ab7e442e9d5d9c7098953608e58014ad2d7ede84252c99d71a2e6c"
+  },
+  "game/armor/093mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "0fb8303a25bf57a0af69714f7061d2285e0fd23c23d0b11af491a279da19d9d0"
+  },
+  "game/armor/094mini.png.bin.compr": {
+    "size": 4404,
+    "sha256": "d1016a3f0cfb6e508845c1bdb144a914219e95c5e056ef36ce6ddd44317f3b59"
+  },
+  "game/armor/094mini.png.pal.compr": {
+    "size": 172,
+    "sha256": "a1a61cf73f46c3a5273256e571c76b3817c12ae7687674a0a332eee1efed6a1c"
+  },
+  "game/armor/095mini.png.bin.compr": {
+    "size": 3420,
+    "sha256": "6a01338ebdf703966522a1f9c10c93afff9d4b75b396dee3edd10be92f5fbfad"
+  },
+  "game/armor/095mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "18d18cf542956f50d9275bd49aa1d578e3cbcf39766c178ff5a1c818cce40bb4"
+  },
+  "game/armor/096mini.png.bin.compr": {
+    "size": 4116,
+    "sha256": "1458611a22b21f73aa37fa20991980777aaf052881adce5bd1168600400293e7"
+  },
+  "game/armor/096mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "c7ddd6067d0886e7637985c195f480b9be15b89ac785cfb11abba86df7572e42"
+  },
+  "game/armor/097mini.png.bin.compr": {
+    "size": 3608,
+    "sha256": "b0ea5b3d9eec85899fe9d7498fda8aa3de3ce0ed5afbeda28126a4aebdb47f26"
+  },
+  "game/armor/097mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "833b0895909f2b99dd820eaf8bb4040b40b166e9ce87bfcfdea5455aab0c81d3"
+  },
+  "game/armor/098mini.png.bin.compr": {
+    "size": 3984,
+    "sha256": "d0f3e4713715920d520a5cbc01ab74bd79e0fc28fdd3942e2b1ff68978fcd0a3"
+  },
+  "game/armor/098mini.png.pal.compr": {
+    "size": 116,
+    "sha256": "182e7571c40b4504483e400e3a52bf7af4e82d452af0ec7759b18949ff0eedc1"
+  },
+  "game/armor/099mini.png.bin.compr": {
+    "size": 3680,
+    "sha256": "27ee7d4717432f948ee313bfb36948b2410590fe9bf3b8cd8798ec7f190e3da3"
+  },
+  "game/armor/099mini.png.pal.compr": {
+    "size": 160,
+    "sha256": "5f94bcc89f72e499578101fcdc690b8d538b830a70db5f3ec97fc46dfecf94c6"
+  },
+  "game/armor/100mini.png.bin.compr": {
+    "size": 4072,
+    "sha256": "ab3d63a5fa05ed3d36abc828d50753466ea12d0e056cbde6bb55525986f9de45"
+  },
+  "game/armor/100mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "060a14ec1c9c49b9df28014410a5e4f116a5cad8d5a82d311d1d88e5dcf152b7"
+  },
+  "game/armor/101mini.png.bin.compr": {
+    "size": 3652,
+    "sha256": "377cc69817aa38d197bebbfef82fc53901c625107d0acf8ab42deb78a3193926"
+  },
+  "game/armor/101mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "41f4dfd96b349d132b5cd41655837de3be75162d9779b495e7e92f449569d108"
+  },
+  "game/armor/102mini.png.bin.compr": {
+    "size": 4736,
+    "sha256": "3437b72305c5f6216cfa0b9a97f8c533481156ce44b0ff2a736ce8577f1b2640"
+  },
+  "game/armor/102mini.png.pal.compr": {
+    "size": 168,
+    "sha256": "3a7e92270894f6193f1fcb5926d19636ac2f3282b9c4b7f58dc7d52eaf7fb9d3"
+  },
+  "game/armor/103mini.png.bin.compr": {
+    "size": 3764,
+    "sha256": "761321f07193bda4b6bca9ad757d78c520d972cb299ac60e81f72a33e6ba6c57"
+  },
+  "game/armor/103mini.png.pal.compr": {
+    "size": 168,
+    "sha256": "a7c59c62b59cfa9a90c63a5e1967c4bc3307fba1f33ea55a18e1bc4ae2f81f00"
+  },
+  "game/armor/104mini.png.bin.compr": {
+    "size": 4252,
+    "sha256": "86ea90ccd42ba955b717f1fda791491157540c61452452b666fa8659bdb11e85"
+  },
+  "game/armor/104mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "37e917eb73a602f663ac6b843ccca5ba09835fe17534f83149d2f1ccfb3d9b7b"
+  },
+  "game/armor/105mini.png.bin.compr": {
+    "size": 4660,
+    "sha256": "c29886b407bc35370c8b9f088c4a930228e063485cd7d04c96ed713986b2d66e"
+  },
+  "game/armor/105mini.png.pal.compr": {
+    "size": 160,
+    "sha256": "7670733b706e29afb6faa660ea0fdf367cd4e07f4b9d579808839b93d3e94e6d"
+  },
+  "game/armor/106mini.png.bin.compr": {
+    "size": 4076,
+    "sha256": "c40dd3c066c27880301c6db29c867b007c68a358f200cd25181b1ef0fe96a040"
+  },
+  "game/armor/106mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "fba29b31584ab8fd79503411fa6ad0483850e424423dc8b9411dde8a5a131fd2"
+  },
+  "game/armor/107mini.png.bin.compr": {
+    "size": 3396,
+    "sha256": "d04a5e2ceea8dbb67a1eee04ac6140c00db9117459506353e6ed3ac69023090a"
+  },
+  "game/armor/107mini.png.pal.compr": {
+    "size": 140,
+    "sha256": "94056e5b1f738a853aef2478d3fb76ebc5f120b6dc7cb860ea7758cbda843edf"
+  },
+  "game/armor/108mini.png.bin.compr": {
+    "size": 3700,
+    "sha256": "1bc7ff6f7e1a90e02b3edbb809d0b5e569e50b1048d6b50de70ac8ad1124c66c"
+  },
+  "game/armor/108mini.png.pal.compr": {
+    "size": 156,
+    "sha256": "afdb922f92b62d421e8d01215219fcc99489aa650389c783f7e3e53d46e22027"
+  },
+  "game/armor/109mini.png.bin.compr": {
+    "size": 3520,
+    "sha256": "e5ae592e3b0e1fbd757e7609691693b612e74a60b817216c55c146dba179a30b"
+  },
+  "game/armor/109mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "9defd0d7511dbc792e7344bfd9a170d0914120c1b8fa956e1210b13e2c3ebf44"
+  },
+  "game/armor/110mini.png.bin.compr": {
+    "size": 3388,
+    "sha256": "b7a4bf614efa506541ed003426a86ec4a877b8d8f43737cbee97e84c81971413"
+  },
+  "game/armor/110mini.png.pal.compr": {
+    "size": 104,
+    "sha256": "26cfb9ca0b42b0718f7c25a5d47d860cecc6da1fa68e58599794564be1c54de1"
+  },
+  "game/armor/111mini.png.bin.compr": {
+    "size": 3920,
+    "sha256": "fad59fac7773a0a16fd6f5df1b1d7464278fd24c4305023f891ef940c5fbb8e0"
+  },
+  "game/armor/111mini.png.pal.compr": {
+    "size": 132,
+    "sha256": "44963e44289b8738d1a7ffb5020758dbbf632bda20f9d01af0b372acf86d427b"
+  },
+  "game/armor/112mini.png.bin.compr": {
+    "size": 5948,
+    "sha256": "cc34ac083019d5b99bad471a576b79ce8035af4a858d4d475aa95084c3264d3a"
+  },
+  "game/armor/112mini.png.pal.compr": {
+    "size": 90,
+    "sha256": "0aaa764103c5570000d67c020a03fbe80cb143aa0f7930c491a4ec756583cf11"
+  },
+  "game/armor/113mini.png.bin.compr": {
+    "size": 3744,
+    "sha256": "20344849e22acb4e4cc3e8374b79068d60f4360d9d70de4a41b72e4e5d230c89"
+  },
+  "game/armor/113mini.png.pal.compr": {
+    "size": 128,
+    "sha256": "b558531b0b60db3521902cc241deca05053bb6f9cb01d806a803e4b482a90235"
+  },
+  "game/armor/114mini.png.bin.compr": {
+    "size": 5937,
+    "sha256": "9002209d850534f2e447078159e9436459bc57946dfb8e255a01fbcb9aba0e4f"
+  },
+  "game/armor/114mini.png.pal.compr": {
+    "size": 99,
+    "sha256": "1efbc8e0cf001e8ca66b65f7a7a10c20233e9caa5063748e2c273b7985a00c35"
+  },
+  "game/armor/115mini.png.bin.compr": {
+    "size": 3876,
+    "sha256": "2b6e1b469f1a394ed190ce6b237cd9c0754ce835287f777ef756b48682ede5ad"
+  },
+  "game/armor/115mini.png.pal.compr": {
+    "size": 108,
+    "sha256": "06ec225421167f93aaefe6b79a365f861d308cd5656afb002b765b6577ba879c"
+  },
+  "game/armor/116mini.png.bin.compr": {
+    "size": 4120,
+    "sha256": "b896d0f0f91e3f572f91aedaf99bc3a5875d542fa4bb857a29146375cdf0dd98"
+  },
+  "game/armor/116mini.png.pal.compr": {
+    "size": 124,
+    "sha256": "b4e5a53a5a36697fddd6a9e39988d4844394f9bbb6b2b8d481f65c3d33f128ea"
+  },
+  "game/armor/117mini.png.bin.compr": {
+    "size": 5104,
+    "sha256": "9c73d6a02f74405cf38bc822d24cabb7155eb27267b1b9de7ddd5b16bfaad17d"
+  },
+  "game/armor/117mini.png.pal.compr": {
+    "size": 100,
+    "sha256": "fda5ea2eb8aa08ffb118b7ecfa87b176cb69a5df1468f3d7060e2f31afb8dac9"
+  },
+  "game/armor/118mini.png.bin.compr": {
+    "size": 3868,
+    "sha256": "46506b2c7b1a5423e166e3d1605d072c4330bf553c3bddb73a746bef67e8a4a0"
+  },
+  "game/armor/118mini.png.pal.compr": {
+    "size": 148,
+    "sha256": "1e9ad7d89b7c3e89d141295e3248942d8d798266b079fa1da0b91d3f7aaa202a"
+  },
+  "game/players/baldwin.pe2mp": {
+    "size": 65568,
+    "sha256": "eca37c24c4b976380e3f93bdb52c59c1821654a71cb74a3a592c37df68cc8a62"
+  },
+  "game/players/douglas.pe2mp": {
+    "size": 65568,
+    "sha256": "4899590fed6d002424ca9e95338134c1f0ebea2ede429fbc8e5ccc3bf2c816c9"
+  },
+  "game/players/general.pe2mp": {
+    "size": 65568,
+    "sha256": "1a625fd4f88ab38ceddfe78c53cb9ba4f85d753a28304547511f65f12f943c47"
+  },
+  "game/players/kyle.pe2mp": {
+    "size": 65568,
+    "sha256": "b3228e694dee70bf1332ac3a6bb41386b4846f59910a62d30c1df2432163b2c2"
+  },
+  "game/players/pierce.pe2mp": {
+    "size": 65568,
+    "sha256": "54b2f85acff5fe7e5f9f08aa7d79d94a40639c5ececacf8cc1d3d2b3610deeeb"
+  },
+  "game/players/police.pe2mp": {
+    "size": 65568,
+    "sha256": "55fdbc636bef3f29bcf3427a033f38f3f12b8f333b7a6ca6743eaf440669495b"
+  },
+  "game/players/president.pe2mp": {
+    "size": 65568,
+    "sha256": "23e2ad4e473a4efcd5f3d35f9ab68feeee8b225d1c7658f46a7b7cd1baef0acd"
+  },
+  "game/players/rupert.pe2mp": {
+    "size": 65568,
+    "sha256": "f9a9813d2b6f6b876b4674f3e76d9997c1ace30c8c486e29099e71ef26c9528e"
+  },
+  "game/players/shared.pe2mp": {
+    "size": 1126666,
+    "sha256": "a75d30992ecd3213205161e17e6aa0b9a758179ea5ba58b42242d16708a5fa86"
+  },
+  "game/players/soldier.pe2mp": {
+    "size": 65568,
+    "sha256": "315d82ebcedfd00405ab140abf24be15efd96fc09f5dac5567df6f5ba6cfdd24"
+  },
+  "game/portraits/aya.pe2pt": {
+    "size": 14380,
+    "sha256": "f589065b279c05d3040ba6242fa53d082446b66b8cb46d8d6180da042346f977"
+  },
+  "game/portraits/baldwin.pe2pt": {
+    "size": 14380,
+    "sha256": "6f623ae332e585435d4c2eebf91d9def1340e2350f052b2a9b57ec537440358d"
+  },
+  "game/portraits/cafeteria.pe2pt": {
+    "size": 14380,
+    "sha256": "2ed6257d9fb2255ed21e89382a50be7d16ad4b755b9aba8baf03f3b30e008332"
+  },
+  "game/portraits/douglas.pe2pt": {
+    "size": 14380,
+    "sha256": "18e836738f34f8425de466a8183abe6b7981987f73f186df08d68843afeeff85"
+  },
+  "game/portraits/general.pe2pt": {
+    "size": 14380,
+    "sha256": "ce792934ab3df0e188b19427a5e45883c8e308c8414c9bb1b38fcf3c1b29fa46"
+  },
+  "game/portraits/jill.pe2pt": {
+    "size": 14380,
+    "sha256": "84d4bc6435e8a23391b378f36e1fc4fdc39a72a9523adea63053fc333a70ac35"
+  },
+  "game/portraits/jodie-camp.pe2pt": {
+    "size": 14380,
+    "sha256": "6e022b2e6b5c4a90e524802279a44d0001b337435553d1de51f7bf09a5f71f62"
+  },
+  "game/portraits/jodie.pe2pt": {
+    "size": 14380,
+    "sha256": "f49f3f0181773b8c01469132b936660fe755a003c2b4f1def53ce36ec001cab5"
+  },
+  "game/portraits/kyle.pe2pt": {
+    "size": 14380,
+    "sha256": "9949afeebcac2e930f59f1c644955e99f1367fb6e5867cbfe868a45a2a253e53"
+  },
+  "game/portraits/pierce.pe2pt": {
+    "size": 14380,
+    "sha256": "75bb249727afdb23003ff0a859bb096f8596ee6a4b3c0c4944a9da0a06b9a5c2"
+  },
+  "game/portraits/police.pe2pt": {
+    "size": 14380,
+    "sha256": "d89b76f7a13e3b434584615c82ba9d256db12afecd41d8ddd882e6a40f9ec45c"
+  },
+  "game/portraits/president.pe2pt": {
+    "size": 14380,
+    "sha256": "8eefcf4c6e503a74001be10e2a24fbcaf24112eb04a718daf0d325d0435c8b94"
+  },
+  "game/portraits/regina.pe2pt": {
+    "size": 14380,
+    "sha256": "240259a11189b6944c1947776e365957ed4d544d27be874535e00935fcc2a28d"
+  },
+  "game/portraits/rupert.pe2pt": {
+    "size": 14380,
+    "sha256": "8235095ae2aa1b048ae91de4d786d6b4276749c52f33e5d442a5af2f1c94f935"
+  },
+  "game/portraits/soldier.pe2pt": {
+    "size": 14380,
+    "sha256": "12063fc180adea47f37287c7fa0468517ea8ac3e6e5609ff3a956f59e159e2bb"
+  },
+  "game/portraits/toilet.pe2pt": {
+    "size": 14380,
+    "sha256": "0f4e6abbce98d993fdd0d52f361bba0e4345a04efbb75b7838b1da7f7b93f5d0"
+  },
+  "game/weapon_variants/kyle-male.pe2mp": {
+    "size": 84012,
+    "sha256": "15f67395cbb6ed4622764b17d8d9b7a1e3e20fe6c66fb86dd5750d3d4cf6f435"
+  },
+  "game/weapon_variants/kyle-retail.pe2mp": {
+    "size": 84012,
+    "sha256": "15f67395cbb6ed4622764b17d8d9b7a1e3e20fe6c66fb86dd5750d3d4cf6f435"
+  },
+  "game/weapon_variants/rupert.pe2mp": {
+    "size": 34832,
+    "sha256": "d65c1ece59817c1118b713c1aec0c7e823300e4296e932a9794f4fa6976e7cea"
+  }
+}

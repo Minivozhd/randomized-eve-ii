@@ -1,0 +1,446 @@
+#pragma once
+
+#include <algorithm>
+#include <cstdint>
+#include <cstring>
+#include <functional>
+#include <memory>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+#include "delivery/Config.hpp"
+#include "utils/Logger.hpp"
+
+class UIContext {
+  public:
+    UIContext() = default;
+    UIContext(uint32_t, std::shared_ptr<PE2Logger>);
+
+    static const uint32_t _UI_CONTEXT_FLAG__RANDOMIZE_ENEMIES = 0x1;
+    static const uint32_t _UI_CONTEXT_FLAG__RANDOMIZE_ITEMS = 0x2;
+    static const uint32_t _UI_CONTEXT_FLAG__RANDOMIZE_MAGIC = 0x4;
+    static const uint32_t _UI_CONTEXT_FLAG__RANDOMIZE_MUSIC = 0x8;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES__NO_AMMO_BOXES = 0x10;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES__ONE_TIME = 0x20;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES__DEFAULT = 0x40;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES_RANDOMIZATION__RANDOMIZED_BOXES = 0x80;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES_RANDOMIZATION__FULL_RANDOM_BOXES = 0x100;
+    static const uint32_t _UI_CONTEXT_FLAG__AMMO_BOXES_RANDOMIZATION__UNRANDOMIZED = 0x200;
+    static const uint32_t _UI_CONTEXT_FLAG__ENEMY_ENHANCEMENT__ENHANCE_ALL_ENEMIES = 0x400;
+    static const uint32_t _UI_CONTEXT_FLAG__ENEMY_ENHANCEMENT__INCLUDE_ENHANCED = 0x800;
+    static const uint32_t _UI_CONTEXT_FLAG__ENEMY_ENHANCEMENT__ENHANCE_DISC2_ENEMIES = 0x1000;
+    static const uint32_t _UI_CONTEXT_FLAG__ENEMY_ENHANCEMENT__NO_ENHANCEMENT = 0x2000;
+    static const uint32_t _UI_CONTEXT_FLAG__ENHANCED_BOSSES = 0x4000;
+    static const uint32_t _UI_CONTEXT_FLAG__MAGIC_ELEMENTS = 0x8000;
+    // 0x08000000 remains reserved for retired New weapons states.
+    static const uint32_t _UI_CONTEXT_FLAG__NEW_ARMORS = 0x10000;
+    static const uint32_t _UI_CONTEXT_FLAG__ACTIVE_TIME_BATTLE = 0x20000;
+    static const uint32_t _UI_CONTEXT_FLAG__ENABLE_ALL_MODES = 0x40000;
+    static const uint32_t _UI_CONTEXT_FLAG__FULL_AMMO_START = 0x80000;
+    static const uint32_t _UI_CONTEXT_FLAG__CLOAK_GOLEM_MULT = 0x100000;
+    static const uint32_t _UI_CONTEXT_FLAG__HUD_COLORING = 0x200000;
+    static const uint32_t _UI_CONTEXT_FLAG__INCREASED_INV_FRAMES = 0x400000;
+    static const uint32_t _UI_CONTEXT_FLAG__NO_WHITE_SCREEN = 0x800000;
+    static const uint32_t _UI_CONTEXT_FLAG__NO_END_BATTLE_ANIM = 0x1000000;
+    static const uint32_t _UI_CONTEXT_FLAG__NO_TURN = 0x2000000;
+    static const uint32_t _UI_CONTEXT_FLAG__INVENTORY_MODE = 0x4000000;
+    // Persisted diagnostic flag; deliberately not offered as the finished boss mutator.
+    static const uint32_t _UI_CONTEXT_FLAG__BOSS_PROTOTYPE = 0x10000000;
+    static const uint32_t _UI_CONTEXT_FLAG__STRANGER_ROW = 0x20000000;
+    static const uint32_t _UI_CONTEXT_FLAG__RUPERT_REVOLVER = 0x40000000u;
+    static const uint32_t _UI_CONTEXT_FLAG__KYLE_P229 = 0x80000000u;
+
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__CHASER = 0x1;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BRAIN_STINGER = 0x2;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__DIVER = 0x4;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__STALKER = 0x8;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__RAT = 0x10;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BUTTERFLY = 0x20;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__LESSER_STRANGER = 0x40;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BRUTE = 0x80;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__SUCKLER = 0x100;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__HORNED_STRANGER = 0x200;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__MIND_SUCKLER = 0x400;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__SCAVANGER = 0x800;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__ODD_STRANGER = 0x1000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__GRINNING_STRANGER = 0x2000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__PAWN_BLADE_GOLEM = 0x4000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__TURRET = 0x8000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__KNIGHT_GOLEM = 0x10000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__ROOK_BLADE_GOLEM = 0x20000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__AMOEBA = 0x40000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__SCORPION = 0x80000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__WHITE_WORM = 0x100000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BAT = 0x200000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BEETLE = 0x400000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BISHOP_GOLEM = 0x800000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__BLOOD_SUCKLER = 0x1000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__FAILED_CHASER = 0x2000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__FAILED_SUCKLER = 0x4000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__MOSSBACK_BRUTE = 0x8000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__GREEN_WORM = 0x10000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__PAWN_GUN_GOLEM = 0x20000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__ROOK_GUN_GOLEM = 0x40000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__FAILED_BRUTE = 0x80000000;
+    static const uint64_t _UI_CONTEXT_ENEMIES_POOL__FAILED_STRANGER = 0x100000000;
+
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__RECOVERY1 = 0x1;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__RECOVERY2 = 0x2;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__RECOVERY3 = 0x4;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__STIM = 0x8;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__COLA = 0x10;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__MP_BOOST1 = 0x20;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__MP_BOOST2 = 0x40;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__PENICILLIN = 0x80;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__LIPSTICK = 0x100;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__BELT_POUCH = 0x200;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__FLARE = 0x400;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__PEPPER_SPRAY = 0x800;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__PROTEINE_CAPSULE = 0x1000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__RINGERS_SOLUTION = 0x2000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__EAU_DE_TOILETTE = 0x4000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__CONSUMABLE__COMBAT_LIGHT = 0x8000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__SMG_CLIP_HOLDER = 0x10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__RIFLE_CLIP_HOLDER = 0x20000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__SNAIL_MAGAZINE = 0x40000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__HAMMER_M4A1 = 0x80000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__PYKE_M4A1 = 0x100000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__JAVELIN_M4A1 = 0x200000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__M203_M4A1 = 0x400000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ATTACHMENT__M9_M4A1 = 0x800000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__LEATHER_JACKET = 0x1000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__TACTICAL_ARMOR = 0x2000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__COMBAT_ARMOR = 0x4000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__ASSAULT_SUIT = 0x8000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__PASGT_VEST = 0x10000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__TACTICAL_VEST = 0x20000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__EOD_SUIT = 0x40000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__TURTLE_VEST = 0x80000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__CHICKEN_PLATE = 0x100000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__NBC_SUIT = 0x200000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__PSYSUIT = 0x400000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__AYA_SPECIAL = 0x800000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__SHOULDER_HOLSTER = 0x1000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__ARMOR__MONK_ROBE = 0x2000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__M93R = 0x4000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__M950 = 0x8000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__P08 = 0x10000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__P229 = 0x20000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__MONGOOSE = 0x40000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__GRENADE_PISTOL = 0x80000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__MM1 = 0x100000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__PA3 = 0x200000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__SP12 = 0x400000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__AS12 = 0x800000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__M4A1 = 0x1000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__M249 = 0x2000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__HYPERVELOCITY = 0x4000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__GUNBLADE = 0x8000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__WEAPON__MP5A5 = 0x10000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__PISTOL_PB = 0x20000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__PISTOL_HYDRA = 0x40000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__PISTOL_SPARTAN = 0x80000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__MAGNUM = 0x100000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__MAGNUM_MAEDA = 0x200000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__GRENADES_RIOT = 0x400000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__GRENADES = 0x800000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__GRENADES_AIRBIRST = 0x1000000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__SHELLS_BUCKSHOT = 0x2000000000000000;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_LOW_INT__AMMO__SHELLS_FIREFLY = 0x4000000000000000;
+
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__AMMO__SHELLS_SLUG = 0x1;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__AMMO__RIFLE_ROUNDS = 0x2;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__CRYSTAL_SKULL = 0x4;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__MEDICINE_WHEEL = 0x8;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__HOLY_WATER = 0x10;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__OFUDA_CHARM = 0x20;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__HUNTER_GOGGLES = 0x40;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__GPS = 0x80;
+    static const uint64_t _UI_CONTEXT_ITEMS_POOL_HIGH_INT__MISC__MD_PLAYER = 0x100;
+
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__RECOVERY1 = 100;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__RECOVERY2 = 180;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__RECOVERY3 = 350;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__STIM = 160;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__COLA = 800;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__MP_BOOST1 = 320;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__MP_BOOST2 = 580;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__PENICILLIN = 160;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__LIPSTICK = 5000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__BELT_POUCH = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__FLARE = 300;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__PEPPER_SPRAY = 500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__PROTEINE_CAPSULE = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__RINGERS_SOLUTION = 6000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__EAU_DE_TOILETTE = 190;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__CONSUMABLE__COMBAT_LIGHT = 200;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__SMG_CLIP_HOLDER = 4040;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__RIFLE_CLIP_HOLDER = 1920;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__SNAIL_MAGAZINE = 1000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__HAMMER_M4A1 = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__PYKE_M4A1 = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__JAVELIN_M4A1 = 20000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__M203_M4A1 = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ATTACHMENT__M9_M4A1 = 7500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__LEATHER_JACKET = 2000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__TACTICAL_ARMOR = 14000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__COMBAT_ARMOR = 6500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__ASSAULT_SUIT = 2000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__PASGT_VEST = 6000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__TACTICAL_VEST = 8000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__EOD_SUIT = 12000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__TURTLE_VEST = 6000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__CHICKEN_PLATE = 8500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__NBC_SUIT = 7500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__PSYSUIT = 8000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__AYA_SPECIAL = 15000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__SHOULDER_HOLSTER = 2580;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__ARMOR__MONK_ROBE = 65000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__M93R = 2000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__M950 = 5750;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__P08 = 2500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__P229 = 6000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__MONGOOSE = 12500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__GRENADE_PISTOL = 5000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__MM1 = 23500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__PA3 = 4000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__SP12 = 9500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__AS12 = 22500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__M4A1 = 4000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__M249 = 25000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__HYPERVELOCITY = 65000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__GUNBLADE = 40000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__WEAPON__MP5A5 = 10000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__PISTOL_PB = 100;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__PISTOL_HYDRA = 300;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__PISTOL_SPARTAN = 500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__MAGNUM = 4000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__MAGNUM_MAEDA = 9000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__GRENADES_RIOT = 400;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__GRENADES = 800;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__GRENADES_AIRBIRST = 400;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__SHELLS_BUCKSHOT = 150;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__SHELLS_FIREFLY = 350;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__SHELLS_SLUG = 800;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__AMMO__RIFLE_ROUNDS = 150;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__CRYSTAL_SKULL = 27500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__MEDICINE_WHEEL = 27500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__HOLY_WATER = 27500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__OFUDA_CHARM = 27500;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__HUNTER_GOGGLES = 2000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__GPS = 1000;
+    static const uint64_t _UI_CONTEXT_ITEMS_COST__MISC__MD_PLAYER = 500;
+
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__RANDOM_STARTING_WEAPON = 0;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__NO_RANDOM_WEAPON = 1;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__FULL_RANDOM_WEAPON = 2;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__TONFA_ONLY_START = 3;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M93R = 4;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M950 = 5;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__P08 = 6;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__P229 = 7;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__MONGOOSE = 8;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__GRENADE_PISTOL = 9;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__MM1 = 10;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__PA3 = 11;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__SP12 = 12;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__AS12 = 13;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1 = 14;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M249 = 15;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__HYPERVELOCITY = 16;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__GUNBLADE = 17;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__MP5A5 = 18;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__P08_WITH_SNAIL = 19;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_CLIP = 20;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_2_CLIPS = 21;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_HAMMER = 22;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_M9 = 23;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_M203 = 24;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_PYKE = 25;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__M4A1_WITH_JAVELIN = 26;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__MP5A5_WITH_CLIP = 27;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_WEAPON__MP5A5_WITH_2_CLIPS = 28;
+
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__RANDOM_STARTING_ARMOR = 0;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__NO_RANDOM_ARMOR = 1;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__FULL_RANDOM_ARMOR = 2;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__LEATHER_JACKET = 3;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__TACTICAL_ARMOR = 4;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__COMBAT_ARMOR = 5;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__ASSAULT_SUIT = 6;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__PASGT_VEST = 7;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__TACTICAL_VEST = 8;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__EOD_SUIT = 9;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__TURTLE_VEST = 10;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__CHICKEN_PLATE = 11;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__NBC_SUIT = 12;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__PSY_SUIT = 13;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__AYA_SPECIAL = 14;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__SHOULDER_HOLSTER = 15;
+    static const uint8_t _UI_CONTEXT_ITEMS_OPTIONS__STARTING_ARMOR__MONK_ROBE = 16;
+
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__RANDOM_FIRST_LEVEL_SPELL = 0;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__RANDOM_FIRST_CIRCLE_SPELL = 1;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__FULL_RANDOM_SPELL = 2;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__NO_RANDOM_SPELL = 3;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PYROKINESIS1 = 4;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PYROKINESIS2 = 5;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PYROKINESIS3 = 6;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__COMBUSTION1 = 7;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__COMBUSTION2 = 8;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__COMBUSTION3 = 9;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__INFERNO1 = 10;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__INFERNO2 = 11;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__INFERNO3 = 12;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__NECROSIS1 = 13;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__NECROSIS2 = 14;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__NECROSIS3 = 15;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PLASMA1 = 16;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PLASMA2 = 17;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__PLASMA3 = 18;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__APOBIOSIS1 = 19;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__APOBIOSIS2 = 20;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__APOBIOSIS3 = 21;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__METABOLISM1 = 22;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__METABOLISM2 = 23;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__METABOLISM3 = 24;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__HEAL1 = 25;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__HEAL2 = 26;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__HEAL3 = 27;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__LIFEDRAIN1 = 28;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__LIFEDRAIN2 = 29;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__LIFEDRAIN3 = 30;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ANTIBODY1 = 31;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ANTIBODY2 = 32;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ANTIBODY3 = 33;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYSHOT1 = 34;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYSHOT2 = 35;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYSHOT3 = 36;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYBALL1 = 37;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYBALL2 = 38;
+    static const uint8_t _UI_CONTEXT_MAGIC_OPTIONS__STARTING_MAGIC__ENERGYBALL3 = 39;
+
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__CAFETERIA_JAZZ_OUTSIDE = 0x1;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__STRANGER_BOSS_MUSIC = 0x2;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__CAFETERIA_JAZZ_INSIDE = 0x4;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__WINNING_NO_9 = 0x8;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__MIST_GARAGE = 0x10;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__FIGHT_1 = 0x20;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__FIRST_STRANGER_SCENE_EATING_CORPSE = 0x40;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__AMBUSH = 0x80;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_APPROACH_SCENE = 0x100;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__GO_OUT_OF_ACROPOLIS_ELEVATOR = 0x200;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_PEACE_ENTERING_SQUARE = 0x400;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_PEACE_2 = 0x800;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_PEACE_3 = 0x1000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_PEACE_4 = 0x2000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__RETURNING_TO_MIST = 0x4000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__ACROPOLIS_PEACE_5 = 0x8000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__DRYFIELD_DAY_PEACE_1 = 0x10000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__DRYFIELD_DAY_PEACE_2_MEETING_DOUGH = 0x20000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__DRYFIELD_BAR_MUSIC = 0x40000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x2c = 0x80000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__DRYFIELD_DAY_PEACE_3 = 0x100000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__DRYFIELD_DAY_PEACE_4 = 0x200000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x2f = 0x400000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x30 = 0x800000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x31 = 0x1000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__HUNT_IN_DRYFIELD = 0x2000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x37 = 0x4000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x39 = 0x8000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3a = 0x10000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3b = 0x20000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3c = 0x40000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3d = 0x80000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3e = 0x100000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x3f = 0x200000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x41 = 0x400000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x42 = 0x800000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x43 = 0x1000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x44 = 0x2000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x45 = 0x4000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x46 = 0x8000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x47 = 0x10000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x48 = 0x20000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x49 = 0x40000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x4a = 0x80000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x4b = 0x100000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x4c = 0x200000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x4d = 0x400000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x4e = 0x800000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x51 = 0x1000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x52 = 0x2000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x53 = 0x4000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x56 = 0x8000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x59 = 0x10000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x5a = 0x20000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x5d = 0x40000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x5e = 0x80000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x5f = 0x100000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x60 = 0x200000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x61 = 0x400000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__0x62 = 0x800000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__SIGH_OF_RELIEF = 0x1000000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__CRUELTY_OF_EVES_FATE = 0x2000000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__NO9_CUT_SCENE = 0x4000000000000000;
+    static const uint64_t _UI_CONTEXT_MUSIC_OPTIONS_POOL__WEIRD_MAN = 0x8000000000000000;
+
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__DEFAULT = 0;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__AYA_SHOULDER_HOLSTER_EAR_PROTECTION = 1;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__AYA_SHOULDER_HOLSTER = 2;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__AYA_LEATHER_JACKET = 3;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__AYA_ASSAULT_SUIT = 4;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__REGINA_DEFAULT = 5;
+    static const uint8_t _UI_CONTEXT_PLAYER_MODEL__REGINA_ARMOR = 6;
+
+    uint32_t seed;
+    uint32_t flags;
+    uint64_t enemies_pool;
+    uint16_t enemies_mults[4];
+    uint64_t items_drop_pool[2];
+    uint64_t items_shop_pool[2];
+    uint16_t items_shop_costs[72];
+    uint16_t items_shop_cost_mult;
+    uint8_t items_dist[5];
+    uint8_t items_start_options[3];
+    uint16_t spell_cost_mult;
+    uint8_t spell_start_option;
+    uint64_t music_pool;
+    uint8_t player_model_option;
+    uint8_t hud_color_r;
+    uint8_t hud_color_g;
+    uint8_t hud_color_b;
+    std::string disc_1;
+    std::string disc_2;
+    std::shared_ptr<PE2Logger> logger;
+
+    std::string serialize() const;
+    void deserialize(const std::string &);
+    delivery::config_t convert();
+
+    // TODO: move to other class: notifier
+    using Listener = std::function<void()>;
+
+    void addListener(Listener listener) {
+        listeners.push_back(listener);
+    }
+
+    void notifyListeners() {
+        for (auto &listener : listeners) {
+            listener();
+        }
+    }
+
+  private:
+    static const std::string _BASE64_CHARS;
+    static inline bool is_base64(unsigned char c) {
+        return (isalnum(c) || (c == '+') || (c == '/'));
+    }
+
+    static std::string base64_encode(const std::string &);
+    static std::string base64_decode(const std::string &);
+
+    std::vector<Listener> listeners;
+};

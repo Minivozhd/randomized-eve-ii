@@ -1,0 +1,9 @@
+* text=auto
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.h text eol=lf
+*.inc text eol=lf
+*.cmake text eol=lf
+*.png binary
+*.ico binary
+README.txt text eol=crlf

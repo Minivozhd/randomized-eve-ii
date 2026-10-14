@@ -1,53 +1,31 @@
 # Feature illustrations
 
-Revised on 14 October 2026 to replace fictional generated objects with actual
-project/game resources at the user's request. Both PNGs are 2172 × 724 pixels.
-They are documentation compositions, not screenshots or additional game content.
+Updated on 14 October 2026. The two 2172 × 724 panels use original game resources
+and approved randomizer assets, assembled directly with ImageMagick. They are
+illustrations of the available features, not gameplay screenshots.
 
-## Current composition
+## Sources and treatment
 
-- `feature-randomization.png`: enemies, items, shops, magic, music and seed-based configuration.
-- `feature-customization.png`: new armor, alternate player models and optional gameplay modifiers.
-
-ImageMagick composes the sources directly. Pixel assets are enlarged with
-nearest-neighbor sampling; their colors, facial features and shapes are not
-regenerated. The Stranger model preview is cropped and reduced. Header, footer
-and feature labels use the original USA game font and its glyph metrics, as
-described in [the banner notes](README.md). The dark plum panels and restrained
-grey-green rules follow the approved banner's menu styling.
-
-## Sources
-
-The following paths refer to the development workspace from which this standalone
-source edition was prepared. They are provenance records, not build dependencies.
-No ROMs, font atlas or extraction tools are required to display these final PNGs.
-
-| Panel | Actual source | Treatment |
+| Element | Source | Treatment |
 | --- | --- | --- |
-| Enemies | `blender_pg/patio_stranger_0x13/patio-preview.png` | Preview render of the original Patio Stranger game model; crop and reduction. This is not an emulator screenshot. |
-| Items | `pe2randomizer/art/new-weapons-ak-20261006/references/m4a1-inventory.png` | Original retail M4A1 inventory image, enlarged 3×. It represents the weapon/item pool; it is not the parked AK variant. |
-| Shops | Original game font | `BP`, the game's shop currency abbreviation; no invented shop art. |
-| Magic | Native retail UI atlas, 4 bpp with CLUT `0x3C08` | Twelve original PE icons, UV rectangle `(176,128)` through `(223,191)`, enlarged 5×. Atlas originates from STAGE0.CDF folder 1, texture 3 and CLUT 4, rendered by the existing UI texture inspection tooling. |
-| Music | Original game font | `BGM`; no invented in-game music icon. |
-| New armor | `pe2randomizer/art/armor-restyle-20261005/approved-game-20261006/assets/015mini.png` | Approved Power Armor inventory image in its final game palette, enlarged 4×, including its separate helmet. This image was AI-assisted during the earlier armor art workflow. |
-| Player models | `pe2randomizer/art/male-players-20261007/game/kyle.png` and `rupert.png` | Approved game-ready Kyle and Rupert portrait images, enlarged 5× with their existing transparency preserved. These portraits were AI-assisted during the earlier portrait workflow. |
-| Gameplay modifiers | Crop from the initial generated customization illustration | Three abstract option sliders retained as a documentation motif. They are not a claim that the game contains these controls. |
+| Enemies | Retail USA STAGE0.CDF, folder 20611, TEX 1 / CLUT 0 | Brute Stranger bestiary image; 128 × 106 crop, excluding the padded white rows, enlarged 3×. |
+| Items | Original retail M4A1 inventory image | Enlarged 3× with nearest-neighbor sampling. |
+| Shops | Douglas in the screenshot supplied by the user on 14 October 2026 | Hand-traced alpha mask and crop, retaining the original pixels, hat and shotgun; reduced to fit the panel. |
+| Magic | Retail USA STAGE0.CDF, folder 1, TEX 3 / CLUT 4 | Original 4 bpp PE icons at UV (176,128), 48 × 64. Each school row uses its own CLUT: 0x3C04, 0x3C05, 0x3C06 and 0x3C07. These preserve the grey frames and colored centers. Zero palette words remain transparent. Enlarged 5×. |
+| Music | Original game font | BGM abbreviation. |
+| New armor | Approved Power Armor, `015mini.png` | Final game-palette image, including the separate helmet; enlarged 4×. AI-assisted artwork from the earlier approved armor workflow. |
+| Player models | Approved game-ready Jodie and Kyle portraits | Native 49 × 62 images, enlarged 5× with existing alpha preserved. AI-assisted artwork from the earlier approved portrait workflow. |
+| Gameplay modifiers | Retail USA STAGE0.CDF, folder 43, BG 0 | Original Scavenger Mode background, decoded from MDEC and enlarged from 320 × 240 to 512 × 384 with Lanczos filtering. No generated details. |
+| Menu background | Retail USA STAGE0.CDF, folder 1, TEX 3 / CLUT 4 | Native 32 × 32 tile at UV (0,0), 4 bpp, CLUT 0x3C0F. Saved as `menu-texture.png`; tiled at 4× scale and darkened for text contrast. The download page uses the same tile. |
 
-## Generation and revision history
+All labels use the original game font and glyph metrics described in the
+[banner notes](README.md). Pixel art is enlarged with nearest-neighbor sampling
+unless otherwise stated. There was no new AI image generation in this revision.
 
-The initial two illustrations were made with the built-in image generation tool,
-one call per image. Their prompts requested a simple PS1-style dark plum menu,
-thin grey-green borders, cyan headings, ivory pixel labels and muted green
-wireframe transitions. The first prompt specified five illustrated categories:
-enemies, items, shops, magic and music, with the footer “CHOOSE YOUR OPTIONS.
-SHARE YOUR SEED.” The second specified armor, player portraits and three abstract
-configuration sliders, with the footer “CUSTOMIZE YOUR LOADOUT AND PLAYSTYLE.”
+The menu texture and the two finished panels are self-contained documentation
+assets. Building the application does not need the source disc, extraction tools,
+font atlas or any other files from the development workspace.
 
-The user then requested real in-game/project art. The current revision uses
-direct compositing rather than asking the generator to redraw those assets.
-Only the abstract slider motif from the first generated customization image is
-retained. All lettering was replaced with the original game's bitmap glyphs.
-
-Both final panels were visually inspected for readable English labels, source
-fidelity, clipping and consistency with the README banner. The imagery does not
-advertise boss randomization, debug loadouts or exhaustive gameplay validation.
+The initial illustrations used generated placeholders. These have now been
+replaced with the sources above. Visual review checks the individual assets,
+palettes, alpha edges, readable labels and the final two-panel composition.

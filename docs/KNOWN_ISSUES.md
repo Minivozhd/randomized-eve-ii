@@ -6,8 +6,6 @@ The following investigations remain open from the working project:
 - **BUG-003:** reports of a black screen when leaving shooting-range levels 2 and
   higher. One armor HP-restoration path was fixed; a full reproduction/save-state
   diagnosis of all remaining reports is still needed.
-- **BUG-024:** a reported inactive enemy in the second Cafeteria fight. Spawn-zone
-  caching was corrected, but the exact reported encounter has not been proven fixed.
 - **REL-001:** original PlayStation hardware validation and legacy payload provenance
   review are not complete.
 - **BUG-016:** Windows installations in paths containing semicolons may fail before

@@ -58,7 +58,7 @@ jobs:
         shell: msys2 {0}
         run: |
           cmake --preset release -DPE2_WARNINGS_AS_ERRORS=ON -DPE2_BUILD_INTEGRATION_TESTS=ON
-          cmake --build --preset release --parallel 4
+          cmake --build --preset release --parallel 4 -- -k 0
           ctest --preset release
           cmake --install build/release --prefix dist/windows --strip
           mkdir -p dist/windows/bin/licenses
@@ -88,7 +88,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           cmake --preset release -DPE2_WARNINGS_AS_ERRORS=ON -DPE2_BUILD_INTEGRATION_TESTS=ON
-          cmake --build --preset release --parallel 4
+          cmake --build --preset release --parallel 4 -- -k 0
           ctest --preset release
       - name: Package and launch macOS application
         if: runner.os == 'macOS'

@@ -48,6 +48,8 @@ int main(int argc, char **argv) {
         require(count == 9, "Missing male models");
         auto first = dir / "STAGE0.CDF", second = dir / "gameplay", patchFile = dir / "test.pe2mp";
         Bytes a(256, 0x12), b(256, 0x23), patch{'P', 'E', '2', 'M', 'P', '0', '0', '1'};
+        // Header, record count, and two records with five words and eight delta bytes.
+        patch.reserve(8 + sizeof(uint32_t) + 2 * (5 * sizeof(uint32_t) + 8));
         word(patch, 2);
         for (uint32_t i = 0; i < 2; ++i) {
             Bytes old(8, i ? 0x23 : 0x12), next(8, 0x66);

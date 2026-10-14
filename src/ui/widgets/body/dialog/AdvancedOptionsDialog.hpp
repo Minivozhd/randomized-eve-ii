@@ -50,7 +50,7 @@ class AdvancedOptionsDialog : public wxFrame {
         std::string tip;
         ModificatorType type;
         std::vector<ModificatorOption> options;
-        uint32_t flag;
+        uint32_t flag = 0;
     };
 
   private:

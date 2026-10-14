@@ -1,8 +1,10 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
 #include <map>
 #include <string>
+#include <type_traits>
 #include <vector>
 #include <wx/combobox.h>
 #include <wx/grid.h>
@@ -200,7 +202,7 @@ class ItemsOptionsDialog : public wxFrame {
     struct ItemProbabilityCategory {
         std::string label;
         std::string tip;
-        wxTextCtrl *input;
+        wxTextCtrl *input = nullptr;
     };
 
     struct StartinItemOption {
@@ -251,7 +253,8 @@ class ItemsOptionsDialog : public wxFrame {
 
     // utility structs
     std::vector<ItemProbabilityCategory> item_probability_categories;
-    std::vector<StartinItemOption> starting_item_options;
+    std::array<StartinItemOption, std::extent_v<decltype(UIContext::items_start_options)>>
+        starting_item_options;
     std::vector<ItemPoolTableRecord> item_pool_table_records{
         ItemPoolTableRecord{"[Co] Recovery1",
                             true,

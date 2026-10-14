@@ -61,7 +61,7 @@ class EnemiesOptionsDialog : public wxFrame {
         std::string label;
         std::string tip;
         std::function<void(wxCommandEvent &)> input_edit_handler;
-        wxTextCtrl *input;
+        wxTextCtrl *input = nullptr;
     };
 
   private:

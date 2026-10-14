@@ -1,5 +1,7 @@
 include(BundleUtilities)
-set(bundle "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/pe2randomizer.app")
+# `cmake --install --prefix` may supply a relative path. BundleUtilities
+# compares absolute dependency paths against this root, so normalize it first.
+get_filename_component(bundle "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/pe2randomizer.app" ABSOLUTE)
 fixup_bundle("${bundle}" "" "@PE2_FIXUP_DIRS@")
 find_program(CODESIGN_EXECUTABLE codesign REQUIRED)
 execute_process(COMMAND "${CODESIGN_EXECUTABLE}" --force --deep --sign - "${bundle}"

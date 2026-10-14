@@ -55,7 +55,7 @@ Discord: https://discord.com/invite/ybyPJYyswW
 ========================================
 
 ----------------------------------------
-     v1.3.0 
+     v1.3.0
 ----------------------------------------
 
 Bug fixes:
@@ -91,7 +91,7 @@ Bug fixes:
 - Improved generation error handling and bounds checks.
 - Checked launching from paths containing Cyrillic, emoji, spaces, and brackets.
   Avoid semicolons in the extraction path.
-  
+
 New features:
 
 - Added nine male player models: Kyle, Rupert, Douglas, a police officer,
@@ -108,7 +108,7 @@ New features:
   and flashlight secondary action.
 - Added a custom Randomized Eve II in-game title screen.
 - Reworked all 113 New Armors inventory pictures to better match the game's
-  original style. New Armors code was also updated to fix numerous bugs. 
+  original style. New Armors code was also updated to fix numerous bugs.
 - Reorganized Advanced Options into available/active modifiers with descriptions.
 
 ----------------------------------------
@@ -125,7 +125,7 @@ New Features:
 - The "Inventory during battles" modifier has been added.
 
 ----------------------------------------
-     v1.2.4 
+     v1.2.4
 ----------------------------------------
 
 Bug fixes:
@@ -147,7 +147,7 @@ New Features:
 - The "No turning" modifier has been added, disabling auto-aim when activated.
 
 ----------------------------------------
-     v1.2.3 
+     v1.2.3
 ----------------------------------------
 
 Bug fixes:
@@ -159,7 +159,7 @@ Bug fixes:
 - Starting weapon is now added to the shooting gallery weapon options to prevent softlock in minigame.
 
 ----------------------------------------
-     v1.2.2 
+     v1.2.2
 ----------------------------------------
 
 Bug Fixes:
@@ -178,7 +178,7 @@ New Features:
 - Cloak Golems Multi-Encounters Mode: Enables Knight and Bishop GOLEMS to spawn alongside other enemies.
 
 ----------------------------------------
-     v1.2.1 
+     v1.2.1
 ----------------------------------------
 
 Bug Fixes:
@@ -191,7 +191,7 @@ Bug Fixes:
 - Some typos were fixed in the armors descriptions.
 
 ----------------------------------------
-     v1.2.0 
+     v1.2.0
 ----------------------------------------
 
 Bug Fixes:
@@ -224,7 +224,7 @@ New features:
 P.S.: consider this release to be beta. New modes were not tested properly so severe bugs are pretty much possible. Waiting for your bugreports!
 
 ----------------------------------------
-     v1.1.1 
+     v1.1.1
 ----------------------------------------
 
 Bug Fixes:
@@ -233,7 +233,7 @@ Bug Fixes:
 - Fixed the bug causing the empty encounter and bugging Aya’s texture at Main Corridor B2 after brain stinger cut scene.
 - Fixed the bug due to which sometimes unpacked stage files were locked causing the randomizer to produce corrupted data and fail.
 - Temporarily removed possibility for hybrid encounter in Water Tower Dryflied Day and Water Tower Dryflied Night since they caused random bugs with sounds and glitched doors.
-- Spawn zones in motel room 2 and 4 were slightly adjusted, hopefully no out of bounds enemies there. 
+- Spawn zones in motel room 2 and 4 were slightly adjusted, hopefully no out of bounds enemies there.
 - Gun Golems and Brain Stingers were removed from randomization pool for B3 Elevator Hall. These enemies presumably caused weird freezes when returning from shelter, but it needs to be tested further.
 - Corridor after Eve Access Tunnel and elevator encounter is not randomized anymore. Some enemies broke the script making game freeze or preventing Brain Stinger Boss from spawning.
 
@@ -244,7 +244,7 @@ Balance Adjustments:
 - Ofuda cost has been adjusted (5000 to 27500 BP).
 
 ----------------------------------------
-     v1.1.0 
+     v1.1.0
 ----------------------------------------
 
 Bug Fixes:
@@ -278,7 +278,7 @@ New Features:
 IMPORTANT: Old randomization state strings are not supported by the new version.
 
 ----------------------------------------
-     v1.0.2 
+     v1.0.2
 ----------------------------------------
 
 Changelog:
@@ -286,7 +286,7 @@ Changelog:
 - Hotfix to the shelter reservoir first encounter crash
 
 ----------------------------------------
-     v1.0.0 
+     v1.0.0
 ----------------------------------------
 
 First public version

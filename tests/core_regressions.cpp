@@ -513,8 +513,8 @@ static void testArmorCatalogue() {
     size_t largestPool = 0;
     for (const auto &[id, slot] : armor_slots_map) {
         textFits(slot.default_name, slot.default_description);
-        auto validateRecord = [&](const auto &name, const auto &description) {
-            const auto record = armorLabelRecord(name, description, id == 0x65);
+        auto validateRecord = [unidentified = id == 0x65](const auto &name, const auto &description) {
+            const auto record = armorLabelRecord(name, description, unidentified);
             size_t cursor = 0;
             std::vector<std::string> fields;
             for (int field = 0; field < 6; ++field) {
@@ -524,7 +524,7 @@ static void testArmorCatalogue() {
                 cursor = end + 1;
             }
             require(fields[0] == name, "Identified armor name changed");
-            require(fields[3] == (id == 0x65 ? "Armor" : ""), "Unidentified armor borrows adjacent name");
+            require(fields[3] == (unidentified ? "Armor" : ""), "Unidentified armor borrows adjacent name");
             require(fields[4].empty() || fields[4] == "Unidentified armor.",
                     "Invalid unidentified description");
             require(fields[5].empty(), "Unidentified armor reads adjacent record");

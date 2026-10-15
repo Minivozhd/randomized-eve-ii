@@ -83,7 +83,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libwxgtk3.2-dev libqrencode-dev pkg-config dpkg-dev xvfb
+          sudo apt-get install -y ninja-build libwxgtk3.2-dev libqrencode-dev pkg-config dpkg-dev xvfb xdotool librsvg2-dev libgirepository1.0-dev imagemagick patchelf file
       - name: Build and test Unix application
         if: runner.os != 'Windows'
         run: |
@@ -134,6 +134,20 @@ jobs:
           result=$?
           set -e
           test "$result" -eq 124
+      - name: Package and test portable Linux AppImage
+        if: runner.os == 'Linux'
+        env:
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          dpkg-deb -x "packages/Randomized-Eve-II-v${VERSION}-linux-x64.deb" AppDir
+          bash cmake/PackageAppImage.sh AppDir "$VERSION" packages
+          xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage
+          docker run --rm -v "$PWD:/work" -w /work archlinux:base bash -c '
+            set -e
+            pacman -Syu --noconfirm xorg-server-xvfb xorg-xauth xdotool ttf-dejavu libglvnd
+            ! pacman -Q wxwidgets-gtk3 2>/dev/null
+            ! pacman -Q qrencode 2>/dev/null
+            xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage'
       - name: Save packages
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
@@ -170,15 +184,15 @@ jobs:
           TAG: ${{ github.ref_name }}
           REPO: ${{ github.repository }}
         run: |
-          test "$(find packages -maxdepth 1 -type f | wc -l)" -eq 4
+          test "$(find packages -maxdepth 1 -type f | wc -l)" -eq 5
           (cd packages; sha256sum * > SHA256SUMS.txt)
           cp README.txt packages/README.txt
           cat > "$RUNNER_TEMP/release-notes.md" <<NOTES
-          Native builds of Randomized Eve II $TAG for Windows x64, macOS Apple Silicon and Intel, and Linux x64 (Ubuntu 24.04).
+          Native builds of Randomized Eve II $TAG for Windows x64, macOS Apple Silicon and Intel, and Linux x64 (AppImage plus an Ubuntu 24.04 DEB).
 
           - Windows: extract the entire ZIP and run pe2randomizer.exe.
           - macOS: extract the matching ZIP and move the app to Applications. The app is ad-hoc signed, not Apple-notarized; see the README for first-launch instructions.
-          - Linux: install the .deb with apt so runtime dependencies are installed too.
+          - Linux: make the AppImage executable and run it, or install the Ubuntu .deb with apt. The AppImage bundles wxWidgets/GTK and qrencode; it requires glibc 2.39 or newer.
 
           [Download page](https://minivozhd.github.io/randomized-eve-ii/) · [Instructions and changelog](https://github.com/$REPO/blob/$TAG/README.txt) · [Known issues](https://github.com/$REPO/blob/$TAG/docs/KNOWN_ISSUES.md)
 

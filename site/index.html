@@ -41,6 +41,11 @@
           <span class="platform">macOS <span class="platform-detail">Intel · macOS 15+</span></span>
           <span class="download-format">App ZIP <span aria-hidden="true">↓</span></span>
         </a>
+        <a class="download-row" href="https://github.com/Minivozhd/randomized-eve-ii/releases/download/v1.3.0/Randomized-Eve-II-v1.3.0-x86_64.AppImage">
+          <span class="cursor" aria-hidden="true">▶</span>
+          <span class="platform">Linux <span class="platform-detail">Arch / CachyOS &amp; other current distros · x86-64</span></span>
+          <span class="download-format">AppImage <span aria-hidden="true">↓</span></span>
+        </a>
         <a class="download-row" href="https://github.com/Minivozhd/randomized-eve-ii/releases/download/v1.3.0/Randomized-Eve-II-v1.3.0-linux-x64.deb">
           <span class="cursor" aria-hidden="true">▶</span>
           <span class="platform">Linux <span class="platform-detail">Ubuntu 24.04+ · x86-64</span></span>
@@ -80,7 +85,8 @@
       </details>
       <details>
         <summary>Installing on Windows, macOS or Linux</summary>
-        <div class="answer"><p><strong>Windows:</strong> extract the entire ZIP into a folder, then open the EXE. Keep the supplied DLLs and resources beside it.</p><p><strong>macOS:</strong> extract the ZIP and move the app to Applications. These builds are not notarized. If macOS blocks an app you trust after you try to launch it, use <strong>System Settings → Privacy &amp; Security → Open Anyway</strong>.</p><p><strong>Linux:</strong> the DEB targets Ubuntu 24.04 or newer on x86-64. From the folder containing the download, install it with:</p><pre><code>sudo apt install ./Randomized-Eve-II-v1.3.0-linux-x64.deb</code></pre><p>APT installs the required system libraries. For other distributions, see the <a href="https://github.com/Minivozhd/randomized-eve-ii#quick-start">source build instructions</a>.</p></div>
+        <div class="answer"><p><strong>Windows:</strong> extract the entire ZIP into a folder, then open the EXE. Keep the supplied DLLs and resources beside it.</p><p><strong>macOS:</strong> extract the ZIP and move the app to Applications. These builds are not notarized. If macOS blocks an app you trust after you try to launch it, use <strong>System Settings → Privacy &amp; Security → Open Anyway</strong>.</p><p><strong>Linux AppImage:</strong> for current x86-64 distributions, including Arch/CachyOS, with glibc 2.39 or newer. Make the file executable, then run it:</p><pre><code>chmod +x Randomized-Eve-II-v1.3.0-x86_64.AppImage
+./Randomized-Eve-II-v1.3.0-x86_64.AppImage</code></pre><p>If FUSE is unavailable, add <code>--appimage-extract-and-run</code>. Runtime libraries are bundled. No Flatpak or Flathub release is currently available.</p><p><strong>Linux DEB:</strong> the DEB targets Ubuntu 24.04 or newer on x86-64. From the folder containing the download, install it with:</p><pre><code>sudo apt install ./Randomized-Eve-II-v1.3.0-linux-x64.deb</code></pre><p>APT installs the required system libraries. For other distributions, see the <a href="https://github.com/Minivozhd/randomized-eve-ii#quick-start">source build instructions</a>.</p></div>
       </details>
       <details>
         <summary>Will the same seed give everyone the same run?</summary>

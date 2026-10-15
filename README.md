@@ -126,8 +126,33 @@ then build a native package with:
 cpack --config build/release/CPackConfig.cmake -G DEB -B dist
 ```
 
-The Linux package uses system dependencies managed by apt. Other distributions
-can build from source with their corresponding development packages.
+The DEB uses system dependencies managed by apt. For other current x86-64
+Linux distributions, including Arch-based systems such as CachyOS, use the
+AppImage. It bundles wxWidgets, GTK and libqrencode and requires glibc 2.39 or
+newer. There is currently no Flatpak or Flathub release.
+
+```sh
+chmod +x Randomized-Eve-II-v1.3.0-x86_64.AppImage
+./Randomized-Eve-II-v1.3.0-x86_64.AppImage
+```
+
+If FUSE is unavailable, use the runtime's extraction mode:
+
+```sh
+./Randomized-Eve-II-v1.3.0-x86_64.AppImage --appimage-extract-and-run
+```
+
+CI tests the AppImage on Ubuntu and in an Arch Linux container without installed
+wxWidgets or libqrencode. This checks startup, bundled libraries and resource
+lookup; it does not replace testing generation on the user's desktop.
+
+`cmake/PackageAppImage.sh` packages an installed AppDir (with a `usr/` prefix)
+on Ubuntu 24.04. It needs linuxdeploy's GTK build dependencies, ImageMagick,
+patchelf and curl; see the workflow for the full package list. It downloads a
+checksum-pinned linuxdeploy and a commit-pinned GTK plugin. Refresh the checksum
+explicitly if the upstream continuous linuxdeploy asset is replaced. The script
+does not publish anything. The manual AppImage workflow can also package the
+verified DEB from an existing release without rebuilding or retagging its code.
 
 Dependencies outside the default search paths can be selected with
 `-DCMAKE_PREFIX_PATH=/path/to/dependencies` or a local, ignored

@@ -37,7 +37,9 @@ jobs:
       - name: Package AppImage
         env:
           TAG: ${{ inputs.tag }}
-        run: bash cmake/PackageAppImage.sh AppDir "${TAG#v}" packages
+        run: |
+          bash cmake/PackageAppImage.sh AppDir "${TAG#v}" packages
+          cp README.txt packages/
       - name: Smoke test on Ubuntu and Arch Linux
         run: |
           xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage
@@ -50,9 +52,7 @@ jobs:
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
           name: appimage
-          path: |
-            packages/*.AppImage
-            README.txt
+          path: packages/*
           if-no-files-found: error
   publish:
     needs: package

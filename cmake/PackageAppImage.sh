@@ -45,5 +45,6 @@ export LDAI_OUTPUT="$outdir/Randomized-Eve-II-v${version}-x86_64.AppImage" LDAI_
     --library /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 \
     --library /usr/lib/x86_64-linux-gnu/libfreetype.so.6 \
     --library /usr/lib/x86_64-linux-gnu/libharfbuzz.so.0 \
+    --library /usr/lib/x86_64-linux-gnu/libfribidi.so.0 \
     --plugin gtk --output appimage
 test -s "$LDAI_OUTPUT"

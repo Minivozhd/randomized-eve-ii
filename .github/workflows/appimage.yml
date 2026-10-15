@@ -1,0 +1,77 @@
+name: Add AppImage to an existing release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to package (uses its published DEB)
+        required: true
+        default: v1.3.0
+permissions:
+  contents: read
+concurrency:
+  group: appimage-${{ inputs.tag }}
+  cancel-in-progress: false
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Install packaging dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwxgtk3.2-dev libqrencode-dev librsvg2-dev libgirepository1.0-dev imagemagick patchelf file xvfb xdotool
+      - name: Download and verify the released binary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          mkdir downloads
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "Randomized-Eve-II-$TAG-linux-x64.deb" --pattern SHA256SUMS.txt --dir downloads
+          (cd downloads; grep "  Randomized-Eve-II-$TAG-linux-x64.deb$" SHA256SUMS.txt | sha256sum -c -)
+          dpkg-deb -x "downloads/Randomized-Eve-II-$TAG-linux-x64.deb" AppDir
+      - name: Package AppImage
+        env:
+          TAG: ${{ inputs.tag }}
+        run: bash cmake/PackageAppImage.sh AppDir "${TAG#v}" packages
+      - name: Smoke test on Ubuntu and Arch Linux
+        run: |
+          xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage
+          docker run --rm -v "$PWD:/work" -w /work archlinux:base bash -c '
+            set -e
+            pacman -Syu --noconfirm xorg-server-xvfb xorg-xauth xdotool ttf-dejavu libglvnd
+            ! pacman -Q wxwidgets-gtk3 qrencode 2>/dev/null
+            xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage'
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: appimage
+          path: packages/*.AppImage
+          if-no-files-found: error
+  publish:
+    needs: package
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: appimage
+          path: packages
+      - name: Append the package and its checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          gh release download "$TAG" --repo "$REPO" --pattern SHA256SUMS.txt --dir packages
+          # Never replace existing native packages or move a release tag.
+          name="Randomized-Eve-II-$TAG-x86_64.AppImage"
+          (cd packages; sha256sum "$name") > new-checksum.txt
+          grep -v "  $name$" packages/SHA256SUMS.txt > previous-checksums.txt
+          cat previous-checksums.txt new-checksum.txt > packages/SHA256SUMS.txt
+          gh release upload "$TAG" "packages/$name" --repo "$REPO"
+          gh release upload "$TAG" packages/SHA256SUMS.txt --repo "$REPO" --clobber

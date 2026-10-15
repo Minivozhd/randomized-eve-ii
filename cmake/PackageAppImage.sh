@@ -31,6 +31,13 @@ for copyright in /usr/share/doc/*/copyright; do
 done
 cp -RL /usr/share/common-licenses "$appdir/usr/share/doc/pe2randomizer/dependencies/"
 dpkg-query -W -f='${Package} ${Version}\n' > "$appdir/usr/share/doc/pe2randomizer/dependencies/build-packages.txt"
+# linuxdeploy normally leaves fontconfig to the host. Include it so a minimal
+# Arch installation can start without installing a second GUI dependency stack.
+mkdir -p "$appdir/etc" "$appdir/apprun-hooks"
+cp -RL /etc/fonts "$appdir/etc/"
+cat > "$appdir/apprun-hooks/fontconfig.sh" <<'HOOK'
+export FONTCONFIG_PATH="$APPDIR/etc/fonts"
+HOOK
 export LDAI_OUTPUT="$outdir/Randomized-Eve-II-v${version}-x86_64.AppImage" LDAI_VERSION="$version"
-"$work/squashfs-root/AppRun" --appdir "$appdir" --desktop-file "$appdir/usr/share/applications/pe2randomizer.desktop" --icon-file "$work/pe2randomizer.png" --plugin gtk --output appimage
+"$work/squashfs-root/AppRun" --appdir "$appdir" --desktop-file "$appdir/usr/share/applications/pe2randomizer.desktop" --icon-file "$work/pe2randomizer.png" --library /usr/lib/x86_64-linux-gnu/libfontconfig.so.1 --plugin gtk --output appimage
 test -s "$LDAI_OUTPUT"

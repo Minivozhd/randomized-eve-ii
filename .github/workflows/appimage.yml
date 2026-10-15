@@ -33,6 +33,7 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "Randomized-Eve-II-$TAG-linux-x64.deb" --pattern SHA256SUMS.txt --dir downloads
           (cd downloads; grep "  Randomized-Eve-II-$TAG-linux-x64.deb$" SHA256SUMS.txt | sha256sum -c -)
           dpkg-deb -x "downloads/Randomized-Eve-II-$TAG-linux-x64.deb" AppDir
+          cp README.txt THIRD_PARTY_NOTICES.md AppDir/usr/share/doc/pe2randomizer/
       - name: Package AppImage
         env:
           TAG: ${{ inputs.tag }}
@@ -43,12 +44,15 @@ jobs:
           docker run --rm -v "$PWD:/work" -w /work archlinux:base bash -c '
             set -e
             pacman -Syu --noconfirm xorg-server-xvfb xorg-xauth xdotool ttf-dejavu libglvnd
-            ! pacman -Q wxwidgets-gtk3 qrencode 2>/dev/null
+            ! pacman -Q wxwidgets-gtk3 2>/dev/null
+            ! pacman -Q qrencode 2>/dev/null
             xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage'
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
           name: appimage
-          path: packages/*.AppImage
+          path: |
+            packages/*.AppImage
+            README.txt
           if-no-files-found: error
   publish:
     needs: package
@@ -74,4 +78,10 @@ jobs:
           grep -v "  $name$" packages/SHA256SUMS.txt > previous-checksums.txt
           cat previous-checksums.txt new-checksum.txt > packages/SHA256SUMS.txt
           gh release upload "$TAG" "packages/$name" --repo "$REPO"
-          gh release upload "$TAG" packages/SHA256SUMS.txt --repo "$REPO" --clobber
+          gh release upload "$TAG" packages/SHA256SUMS.txt packages/README.txt --repo "$REPO" --clobber
+          gh release view "$TAG" --repo "$REPO" --json body --jq .body > release-notes.md
+          cat >> release-notes.md <<'NOTES'
+
+          Linux AppImage is also available for current x86-64 distributions, including Arch/CachyOS (glibc 2.39+). Make the downloaded AppImage executable, then open it. If FUSE is unavailable, use `--appimage-extract-and-run`. Startup was checked on Ubuntu 24.04 and in an Arch Linux container. No Flatpak/Flathub package is published.
+          NOTES
+          gh release edit "$TAG" --repo "$REPO" --notes-file release-notes.md

@@ -26,7 +26,13 @@ release download. Runtime libraries are included inside the app.
 Linux x64 (Ubuntu 24.04): Install the .deb through apt to resolve dependencies:
   sudo apt install ./Randomized-Eve-II-v1.3.0-linux-x64.deb
 Launch Randomized Eve II from the application menu or run pe2randomizer.
-Other distributions can build from the source repository.
+Linux x64 (Arch/CachyOS and other current distributions): use the AppImage.
+Requires glibc 2.39 or newer. Bundled libraries include wxWidgets/GTK and qrencode.
+  chmod +x Randomized-Eve-II-v1.3.0-x86_64.AppImage
+  ./Randomized-Eve-II-v1.3.0-x86_64.AppImage
+If FUSE is unavailable:
+  ./Randomized-Eve-II-v1.3.0-x86_64.AppImage --appimage-extract-and-run
+There is currently no Flatpak/Flathub release.
 
 How to use:
 

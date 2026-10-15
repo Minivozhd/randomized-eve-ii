@@ -18,8 +18,11 @@ Public availability does not grant rights to the original game's material.
   LGPL-2.1-or-later. Release packages use the shared library.
 - Windows and macOS packages include the shared dependencies required by their
   respective builds. Accompanying dependency license notices are included under
-  `licenses/`. Linux packages obtain their libraries through the package manager,
-  which provides the corresponding copyright and license files.
+  `licenses/`. Linux DEBs obtain their libraries through the package manager.
+  AppImages bundle Linux runtime libraries and include Ubuntu package copyright
+  notices and common license texts under `usr/share/doc/pe2randomizer/dependencies`.
+  The included package/version inventory identifies the build dependencies;
+  corresponding package sources are available from the Ubuntu archive.
 
 Dependency sources and build recipes are available from the
 [MSYS2 package repository](https://github.com/msys2/MINGW-packages) and

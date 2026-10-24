@@ -57,11 +57,14 @@ int main(int argc, char **argv) {
         std::ofstream out(path, std::ios::binary);
         out.write(reinterpret_cast<const char *>(fixture.data()), fixture.size());
     }
-    auto log = PE2Logger::getInstance((root / "test.log").string());
+    // The singleton logger stays open until process exit. Keep its diagnostic
+    // outside the removable fixture directory (Windows locks open files).
+    auto log = PE2Logger::getInstance(root.string() + ".log");
     usecase::Randomizer randomizer(log);
     usecase::RandomizerTestAccess::magic(randomizer);
     std::ifstream input(path, std::ios::binary);
     std::vector<unsigned char> patched(std::istreambuf_iterator<char>(input), {});
+    input.close();
     test::require(patched.size() == fixture.size(), "Magic patch changed package size");
     if (argc == 3) {
         std::ofstream output(argv[2], std::ios::binary);

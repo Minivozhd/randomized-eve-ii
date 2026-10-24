@@ -1,6 +1,12 @@
 name: Build, test and release
 on:
   workflow_dispatch:
+    inputs:
+      replace_release:
+        description: Existing release tag to rebuild in place (leave empty for build only)
+        required: false
+        default: ''
+        type: string
   push:
     branches: [main]
     tags: ['v*']
@@ -35,10 +41,17 @@ jobs:
       - name: Read project version
         id: version
         shell: bash
+        env:
+          REPLACE_RELEASE: ${{ inputs.replace_release }}
         run: |
           version=$(sed -nE 's/^project\(pe2randomizer VERSION ([0-9.]+).*/\1/p' CMakeLists.txt)
           test -n "$version"
           if [ "$GITHUB_REF_TYPE" = tag ]; then test "$GITHUB_REF_NAME" = "v$version"; fi
+          if [ -n "$REPLACE_RELEASE" ]; then
+            test "$GITHUB_EVENT_NAME" = workflow_dispatch
+            test "$GITHUB_REF" = refs/heads/main
+            test "$REPLACE_RELEASE" = "v$version"
+          fi
           echo "value=$version" >> "$GITHUB_OUTPUT"
       - name: Install Windows dependencies
         if: runner.os == 'Windows'
@@ -168,7 +181,7 @@ jobs:
           if-no-files-found: ignore
   release:
     name: Publish tagged release
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.replace_release != '')
     needs: native
     runs-on: ubuntu-24.04
     permissions:
@@ -185,7 +198,8 @@ jobs:
       - name: Publish all tested packages together
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ inputs.replace_release || github.ref_name }}
+          REPLACE_RELEASE: ${{ inputs.replace_release }}
           REPO: ${{ github.repository }}
         run: |
           test "$(find packages -maxdepth 1 -type f | wc -l)" -eq 5
@@ -210,4 +224,18 @@ jobs:
 
           Requires your own original USA BIN/CUE images for both discs. No game discs or BIOS are included. See SHA256SUMS.txt to verify downloads.
           NOTES
-          gh release create "$TAG" packages/* --repo "$REPO" --verify-tag --title "Randomized Eve II $TAG" --notes-file "$RUNNER_TEMP/release-notes.md"
+          if [ -n "$REPLACE_RELEASE" ]; then
+            # Explicit manual replacement only, after every platform passed.
+            # Keep the existing release ID and asset names/download URLs.
+            test "$GITHUB_REF" = refs/heads/main
+            test "$(gh api "repos/$REPO/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
+            test "$(gh release view "$TAG" --repo "$REPO" --json isDraft --jq .isDraft)" = false
+            tag_object=$(gh api --method POST "repos/$REPO/git/tags" \
+              -f tag="$TAG" -f message="Rebuild $TAG from $GITHUB_SHA" \
+              -f object="$GITHUB_SHA" -f type=commit --jq .sha)
+            gh api --method PATCH "repos/$REPO/git/refs/tags/$TAG" -f sha="$tag_object" -F force=true
+            gh release upload "$TAG" packages/* --repo "$REPO" --clobber
+            gh release edit "$TAG" --repo "$REPO" --notes-file "$RUNNER_TEMP/release-notes.md"
+          else
+            gh release create "$TAG" packages/* --repo "$REPO" --verify-tag --title "Randomized Eve II $TAG" --notes-file "$RUNNER_TEMP/release-notes.md"
+          fi

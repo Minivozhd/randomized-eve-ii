@@ -248,7 +248,7 @@ inline constexpr PayloadFingerprint payloadFingerprints[] = {
     {"game/players/douglas.pe2mp", 65568, 0x1f66f48bu},
     {"game/players/general.pe2mp", 65568, 0x53a08986u},
     {"game/players/kyle.pe2mp", 65568, 0xde8111e8u},
-    {"game/players/pierce.pe2mp", 65568, 0x70ca21b4u},
+    {"game/players/pierce.pe2mp", 65568, 0x15861e24u},
     {"game/players/police.pe2mp", 65568, 0xf5a5692fu},
     {"game/players/president.pe2mp", 65568, 0xe739fa43u},
     {"game/players/rupert.pe2mp", 65568, 0x73a39276u},

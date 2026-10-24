@@ -76,6 +76,7 @@ Improvements:
   with more space for longer names.
 - Renamed "General / commander" to "Lieutenant".
 - Restored Pierce's sunglasses in-game and updated his portrait.
+  Corrected their draw order to match the original model.
 
 Bug fixes:
 - Fixed Magic elements allowing ordinary PE-wheel casts to consume the

@@ -3,6 +3,11 @@
 This cleanup does not close gameplay bugs merely because the source builds.
 The following investigations remain open from the working project:
 
+- **BUG-027:** player Pierce's sunglasses can flicker behind his face in v1.3.1.
+  The rebuilt packages restore the original accessory's ordering-table bias for
+  its two draw records. Native resolver, packet, ordering-table and sequential
+  resource-loader checks pass. Movement/cutscene review in DuckStation and PS1
+  verification remain pending.
 - **BUG-003:** reports of a black screen when leaving shooting-range levels 2 and
   higher. One armor HP-restoration path was fixed; a full reproduction/save-state
   diagnosis of all remaining reports is still needed.

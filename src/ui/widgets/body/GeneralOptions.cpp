@@ -61,7 +61,9 @@ void GeneralOptions::drawRandomizationOptions() {
         checkboxes[i]->SetValue(true);
         wxButton *button = new wxButton(this, wxID_ANY, randomization_option.button_label);
         button->Bind(wxEVT_BUTTON, randomization_option.button_click_handler);
-        if (i == 3)
+        if (key_value.first == GENERAL_OPTIONS_MAGIC)
+            magic_randomization_button = button;
+        if (key_value.first == GENERAL_OPTIONS_MUSIC)
             music_randomization_button = button;
         button->SetMinSize(wxSize(GENERAL_OPTIONS_BUTTON_SIZE_WIDTH, -1));
 

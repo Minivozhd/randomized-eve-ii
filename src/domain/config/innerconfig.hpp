@@ -70,5 +70,7 @@ typedef struct inner_config {
     std::string input_file_2 = "";
     std::string randomization_state_string = "";
     int randomize_category = 0; // 0 - NRS and 1 - BN
+    bool pe1_music = false;
+    bool no_magic = false;
 } inner_config_t;
 } // namespace domain

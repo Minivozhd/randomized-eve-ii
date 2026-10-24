@@ -216,5 +216,7 @@ typedef struct config {
     bool debug_weapons = false;  // Local test profile; intentionally outside release seed format.
     bool rupert_revolver = false;
     bool kyle_p229 = false;
+    bool pe1_music = false;
+    bool no_magic = false;
 } config_t;
 } // namespace delivery

@@ -1,0 +1,45 @@
+PE1 music mutator — bundled music pack, PE2 USA, version 1.3.1
+
+Enable Advanced Options > Parasite Eve 1 music. The ordinary music checkbox
+and its configuration button are disabled while this mutator is active.
+Disabling the mutator restores the previous music randomization setting.
+Old presets keep their original meaning; new enabled presets use a PEM1 trailer.
+
+The mutator boosts the 37 replacement song levels by approximately 30%
+(+2.3 dB), preserving their channel mix and native master/fade controls.
+Restart the rebuilt app and regenerate disc images to apply the louder mix.
+
+The user-selected 37 tracks/phases are assigned to PEACEFUL (7), EXPLORING (9),
+INTENSE (7), and FIGHT (14). Source IDs 0x18 and 0x1D are excluded. MISC scenes
+use the combined PE1 pool. Existing per-scene forbidden PE2 IDs remain respected.
+
+pe1-music.pack is an XOR patch against verified PE2 USA music bank bytes.
+It is included in every release package and in the source repository.
+The app expects assets/game/music/pe1-music.pack below its resource root.
+Keep the full release package together; no separate download is needed.
+Missing, damaged, or mismatched packs fail before generation; all original bank
+preimages are checked before the first bank is written. CDF and HED extents do
+not grow. Both original disc images remain read-only.
+
+These are adapted native hMPK/MIDI banks, not MP3 playback or emulator hooks.
+The original PS1 RAM and MIDI capacities are retained. Repeated phrases use
+native F5/F6 commands; loops use native NRPN commands. Original instrument
+ADSR is retained. Large banks have explicitly recorded half-rate samples.
+Songs exceeding channel/sequence limits lose quieter source parts and use
+coarser automation.
+Short loops are reconstructed where two backward jumps were captured; other
+parts repeat the extracted phrase, so a source intro may repeat. Reverb uses
+PE2's existing preset 3 with PE1 sends/depth, not the preview's PE1 preset 4.
+Signed stereo gains are folded to magnitude. This is not bit-exact PE1 playback.
+
+Native CPU tests mock physical SPU allocation and DMA. In-game listening,
+transitions, battle/SFX coexistence, fades, CD timing and original PlayStation
+hardware validation remain separate pending checks. Donor conversion and native verification research stay outside this source
+repository. Publication of the bundled patch was approved for v1.3.1.
+
+Track 0x26 has a stronger arrangement adaptation: one quiet melodic lane is
+omitted; eight accompaniment lanes share a tuned key-map, with fixed median
+gain/pan. Their original first 32.94 seconds are followed by a repeating
+4.71-second passage. The main melody retains its complete extracted phrase.
+Native stream capacity remains 18 tracks and 16 channels; physical voice
+allocation and release tails still require listening in the game.

@@ -54,6 +54,7 @@ class Randomizer : public IRandomizer {
     void randomize(domain::inner_config_t) override;
 
   private:
+    friend struct RandomizerTestAccess;
     void enhanceEnemiesAndBosses();
     void oneTimeAmmoBoxPickups();
     void disableAmmoBoxes(std::string filename, std::vector<size_t> addresses, bool acropolis);

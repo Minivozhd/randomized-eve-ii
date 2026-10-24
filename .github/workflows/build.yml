@@ -61,6 +61,7 @@ jobs:
           cmake --build --preset release --parallel 4 -- -k 0
           ctest --preset release
           cmake --install build/release --prefix dist/windows --strip
+          build/release/tests/pe2_pe1_music.exe --validate-resources dist/windows/bin/resources
           mkdir -p dist/windows/bin/licenses
           cp -R /ucrt64/share/licenses/. dist/windows/bin/licenses/
       - name: Package and launch Windows application
@@ -97,6 +98,7 @@ jobs:
           PLATFORM: ${{ matrix.platform }}
         run: |
           cmake --install build/release --prefix dist/macos --strip
+          build/release/tests/pe2_pe1_music --validate-resources dist/macos/pe2randomizer.app/Contents/Resources
           license_dir="$PWD/dist/macos/pe2randomizer.app/Contents/Resources/licenses"
           mkdir -p "$license_dir"
           for formula in wxwidgets qrencode $(brew deps --union wxwidgets qrencode); do
@@ -128,6 +130,7 @@ jobs:
           cp "dist/pe2randomizer_${VERSION}_amd64.deb" "packages/Randomized-Eve-II-v${VERSION}-linux-x64.deb"
           dpkg-deb -I packages/*.deb
           sudo apt-get install -y ./packages/*.deb
+          build/release/tests/pe2_pe1_music --validate-resources /usr/share/pe2randomizer
           cd "$RUNNER_TEMP"
           set +e
           timeout 8s xvfb-run -a /usr/bin/pe2randomizer
@@ -140,6 +143,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.value }}
         run: |
           dpkg-deb -x "packages/Randomized-Eve-II-v${VERSION}-linux-x64.deb" AppDir
+          build/release/tests/pe2_pe1_music --validate-resources AppDir/usr/share/pe2randomizer
           bash cmake/PackageAppImage.sh AppDir "$VERSION" packages
           xvfb-run -a bash tests/appimage-smoke.sh packages/*.AppImage
           docker run --rm -v "$PWD:/work" -w /work archlinux:base bash -c '
@@ -187,7 +191,15 @@ jobs:
           test "$(find packages -maxdepth 1 -type f | wc -l)" -eq 5
           (cd packages; sha256sum * > SHA256SUMS.txt)
           cp README.txt packages/README.txt
-          cat > "$RUNNER_TEMP/release-notes.md" <<NOTES
+          # README.txt is the single changelog source. Extract only this version.
+          awk -v tag="$TAG" '
+            { sub(/\r$/, "") }
+            $0 ~ "^     " tag "( |$)" { found=1; next }
+            found && /^----/ { if (started) exit; started=1; next }
+            found && started { print }
+          ' README.txt > "$RUNNER_TEMP/release-notes.md"
+          test -s "$RUNNER_TEMP/release-notes.md"
+          cat >> "$RUNNER_TEMP/release-notes.md" <<NOTES
           Native builds of Randomized Eve II $TAG for Windows x64, macOS Apple Silicon and Intel, and Linux x64 (AppImage plus an Ubuntu 24.04 DEB).
 
           - Windows: extract the entire ZIP and run pe2randomizer.exe.

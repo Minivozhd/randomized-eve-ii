@@ -1,4 +1,5 @@
 #include "domain/randomizer/usecases/Randomizer.hpp"
+#include "domain/magic/usecases/NoMagic.hpp"
 #include "utils/RuntimePaths.hpp"
 
 // TODO: error handling and move all constants to headers
@@ -86,8 +87,13 @@ void usecase::Randomizer::enableMagicElements() {
                                  FORMAT_DECOMPRESSED + ".");
     }
 
-    // disables magic during battle and allows cancel spell startup
+    // Item casts enter at 800A3520 through queuedIndex. Skip both ways of
+    // opening the ordinary PE wheel (pad and scripted flag). NOPing only the
+    // actor load left v0=80110000, treating unrelated resource data as an actor;
+    // a wheel cast could then consume Gp_SelItemRec, including an equipped gun.
+    utils::file_works::writeFourBytesLittleEndian(game_lib_file, 0x10000089, 0xfaa0);
     utils::file_works::writeFourBytesLittleEndian(game_lib_file, 0x00000000, 0xfaa4);
+    // Allow cancelling an item cast before release.
     utils::file_works::writeFourBytesLittleEndian(game_lib_file, 0x00000000, 0x3ae0c);
     utils::file_works::writeFourBytesLittleEndian(game_lib_file, 0x00000000, 0x3aed0);
 
@@ -531,13 +537,13 @@ void usecase::Randomizer::applyMods() {
         utils::file_works::writeFourBytesLittleEndian(outfile, 0x00000000, 0x15ac);
         utils::file_works::writeFourBytesLittleEndian(outfile, 0x00000000, 0x2624);
     }
-    if (config.flags.magic_pickup_mode) {
+    if (!config.no_magic && config.flags.magic_pickup_mode) {
         enableMagicElements();
     }
     if (config.flags.enhanced_bosses || config.bosses_damage != 100 || config.bosses_hp) {
         enhanceEnemiesAndBosses();
     }
-    if (config.flags.active_time_battle && !config.flags.magic_pickup_mode) {
+    if (!config.no_magic && config.flags.active_time_battle && !config.flags.magic_pickup_mode) {
         activeTimeBattle();
     }
     if (config.flags.enable_hud_coloring) {
@@ -562,6 +568,13 @@ void usecase::Randomizer::applyMods() {
 
     if (config.flags.inventory_mode) {
         enableInventoryDuringBattles();
+    }
+    if (config.no_magic) {
+        std::fstream gameplay(temp_dir + "STAGE0/00_base.pe2lvl.decompr",
+                              std::ios::in | std::ios::out | std::ios::binary);
+        if (!gameplay)
+            throw std::runtime_error("Cannot open gameplay for No magic");
+        domain::magic::no_magic::apply(gameplay);
     }
 }
 
@@ -668,7 +681,7 @@ void usecase::Randomizer::enableInventoryDuringBattles() {
 std::vector<std::shared_ptr<usecase::IFeatureRandomizer>> usecase::Randomizer::getRandomizers() {
     std::vector<std::shared_ptr<usecase::IFeatureRandomizer>> feature_randomizers{};
 
-    if (config.flags.randomize_music) {
+    if (config.pe1_music || config.flags.randomize_music) {
         feature_randomizers.push_back(
             std::make_shared<usecase::music::MusicRandomizer>(_logger, gen, temp_dir, config));
     }
@@ -688,7 +701,7 @@ std::vector<std::shared_ptr<usecase::IFeatureRandomizer>> usecase::Randomizer::g
         feature_randomizers.push_back(
             std::make_shared<usecase::armors::ArmorRandomizer>(_logger, gen, temp_dir, config));
     }
-    if (config.flags.randomize_magic) {
+    if (!config.no_magic && config.flags.randomize_magic) {
         feature_randomizers.push_back(
             std::make_shared<usecase::magic::MagicRandomizer>(_logger, gen, temp_dir, config));
     }
@@ -700,6 +713,11 @@ void usecase::Randomizer::randomize(domain::inner_config_t _config) {
     // TODO: adaptive file lists
     _logger->log("[INF] [Randomizer] Entering randomize function()...");
     config = _config;
+    if (config.no_magic) {
+        config.flags.randomize_magic = false;
+        config.flags.magic_pickup_mode = false;
+        config.flags.active_time_battle = false;
+    }
 
     // set fixed random seed
     gen = std::mt19937(config.randomize_seed);

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(pe2randomizer VERSION 1.3.0 DESCRIPTION "Parasite Eve 2 Randomizer" LANGUAGES CXX)
+project(pe2randomizer VERSION 1.3.1 DESCRIPTION "Parasite Eve 2 Randomizer" LANGUAGES CXX)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "Use an out-of-source build: cmake --preset release")
@@ -12,7 +12,7 @@ option(PE2_BUILD_GUI "Build the wxWidgets application" ON)
 option(PE2_WARNINGS_AS_ERRORS "Treat project warnings as errors" OFF)
 option(PE2_ENABLE_SANITIZERS "Enable address and undefined-behavior sanitizers (Clang/GCC)" OFF)
 option(PE2_BUNDLE_DEPENDENCIES "Copy dependent libraries into the installed macOS app" ON)
-set(PE2_RELEASE_DATE "13.10.2026")
+set(PE2_RELEASE_DATE "24.10.2026")
 set(PE2_COPYRIGHT_YEARS "2023-2026")
 configure_file(cmake/BuildInfo.hpp.in generated/BuildInfo.hpp @ONLY)
 

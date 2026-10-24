@@ -1,6 +1,6 @@
 # Source edition maintenance
 
-- This is the source repository for version 1.3.0. Do not change the
+- This is the source repository for version 1.3.1. Do not change the
   version/release date without an explicit release request.
 - Use CMake as the single build system and `pe2_core` for both the GUI and tests.
 - Keep patch results in C++; do not add asset generators, decompilation, ROMs,

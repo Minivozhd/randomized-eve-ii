@@ -8,6 +8,33 @@
 #include <vector>
 
 namespace domain::costume::portraits {
+void applyNameLayout(std::iostream &gameplay) {
+    // Gp_HpMpBarTask: use a reserved 128x8 atlas strip at (64,232).
+    // Keep the right edge before the portrait, moving only the left edge.
+    // Instructions and all following callbacks retain their retail addresses.
+    struct Edit {
+        unsigned offset, before, after;
+    };
+    constexpr Edit edits[] = {
+        {0x2df60, 0x2442ff8e, 0x2442ff4e},
+        {0x2df70, 0x24020038, 0x24020040},
+        {0x2df78, 0x24020060, 0x240200e8},
+        {0x2df80, 0x24020040, 0x24020080},
+    };
+    for (const auto &e : edits) {
+        gameplay.seekg(e.offset);
+        if (utils::binary::readLittleEndianWord(gameplay, "player name layout") != e.before)
+            throw std::runtime_error("Unsupported player name renderer");
+    }
+    for (const auto &e : edits) {
+        gameplay.seekp(e.offset);
+        for (unsigned i = 0; i != 4; ++i)
+            gameplay.put(static_cast<char>(e.after >> (8 * i)));
+    }
+    gameplay.flush();
+    if (!gameplay)
+        throw std::runtime_error("Cannot write player name renderer");
+}
 std::string assetKey(pe2_costume_id_t costume) {
     if (auto key = male::assetKey(costume); !key.empty())
         return key;

@@ -2,6 +2,7 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 using namespace domain::costume;
 using namespace domain::costume::portraits;
@@ -37,6 +38,36 @@ int main(int argc, char **argv) {
     std::filesystem::create_directory(dir);
     try {
         require(argc == 1 || argc == 2, "Usage: pe2_player_portraits [STAGE0.CDF]");
+        // Guard the entire instruction set before touching the gameplay overlay.
+        std::string renderer(0x2df90, '\x5a');
+        const std::pair<unsigned, unsigned> instructions[] = {
+            {0x2df60, 0x2442ff8e}, {0x2df70, 0x24020038}, {0x2df78, 0x24020060}, {0x2df80, 0x24020040}};
+        auto putWord = [](std::string &s, unsigned off, unsigned value) {
+            for (unsigned i = 0; i < 4; ++i)
+                s[off + i] = static_cast<char>(value >> (8 * i));
+        };
+        for (auto [off, value] : instructions)
+            putWord(renderer, off, value);
+        auto expectedRenderer = renderer;
+        putWord(expectedRenderer, 0x2df60, 0x2442ff4e);
+        putWord(expectedRenderer, 0x2df70, 0x24020040);
+        putWord(expectedRenderer, 0x2df78, 0x240200e8);
+        putWord(expectedRenderer, 0x2df80, 0x24020080);
+        std::stringstream validRenderer(renderer);
+        applyNameLayout(validRenderer);
+        require(validRenderer.str() == expectedRenderer, "Name renderer changed unrelated bytes");
+        for (auto [off, value] : instructions) {
+            auto invalid = renderer;
+            putWord(invalid, off, value ^ 1);
+            std::stringstream stream(invalid);
+            bool rejected = false;
+            try {
+                applyNameLayout(stream);
+            } catch (const std::exception &) {
+                rejected = true;
+            }
+            require(rejected && stream.str() == invalid, "Name renderer validation is not atomic");
+        }
         require(assetKey(PE2_COSTUME_DEFAULT).empty(), "Default must preserve retail");
         require(assetKey(PE2_COSTUME_SHOULDER_HOLSTER_WITH_EAR_PROTECTION) ==
                     assetKey(PE2_COSTUME_SHOULDER_HOLSTER),

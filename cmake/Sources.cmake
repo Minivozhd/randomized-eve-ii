@@ -21,8 +21,10 @@ set(PE2_CORE_SOURCES
     domain/item/usecases/ItemRandomizer.cpp
     domain/magic/entities/Magic.cpp
     domain/magic/usecases/MagicRandomizer.cpp
+    domain/magic/usecases/NoMagic.cpp
     domain/music/entities/Music.cpp
     domain/music/usecases/MusicRandomizer.cpp
+    domain/music/usecases/Pe1Music.cpp
     domain/randomizer/usecases/Randomizer.cpp
     domain/rom/usecases/RomUsecase.cpp
     utils/BitsReader.cpp

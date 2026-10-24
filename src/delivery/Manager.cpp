@@ -1,4 +1,5 @@
 #include "delivery/Manager.hpp"
+#include "domain/music/usecases/Pe1Music.hpp"
 #include "patches/title_screen/TitleBackground.hpp"
 #include "patches/weapon_variants/WeaponVariants.hpp"
 #include "utils/RuntimePaths.hpp"
@@ -36,9 +37,9 @@ inner_config_t Manager::generateInnerConfig(const config_t &config) {
                 .randomize_enemies = config.flags.randomize_enemies,
                 .randomize_items = config.flags.randomize_items,
                 .randomize_shops = config.flags.randomize_shops,
-                .randomize_music = config.flags.randomize_music,
-                .randomize_magic = config.flags.randomize_magic,
-                .active_time_battle = config.flags.active_time_battle,
+                .randomize_music = config.flags.randomize_music && !config.pe1_music,
+                .randomize_magic = !config.no_magic && config.flags.randomize_magic,
+                .active_time_battle = !config.no_magic && config.flags.active_time_battle,
                 .enhanced_bosses = config.flags.enhanced_bosses,
                 .full_ammo = config.flags.full_ammo,
                 .cloak_golem_mult = config.flags.cloak_golem_mult,
@@ -46,7 +47,7 @@ inner_config_t Manager::generateInnerConfig(const config_t &config) {
                 .enable_special_modes = config.flags.enable_special_modes,
                 .enable_map_in_fight = config.flags.enable_map_in_fight,
                 .additional_armors = config.flags.additional_armors,
-                .magic_pickup_mode = config.flags.magic_pickup_mode,
+                .magic_pickup_mode = !config.no_magic && config.flags.magic_pickup_mode,
                 .increased_inv = config.flags.increased_inv,
                 .no_white_screen = config.flags.no_white_screen,
                 .no_win_pose = config.flags.no_win_pose,
@@ -93,6 +94,8 @@ inner_config_t Manager::generateInnerConfig(const config_t &config) {
         .input_file_2 = config.input_file_2,
         .randomization_state_string = config.randomization_state_string,
         .randomize_category = static_cast<int>(config.randomize_category),
+        .pe1_music = config.pe1_music,
+        .no_magic = config.no_magic,
     };
 }
 
@@ -196,6 +199,13 @@ int Manager::randomize(const config_t &config) {
         std::cerr << last_error << std::endl;
         return code;
     };
+    if (config.pe1_music) {
+        try {
+            domain::music::pe1::validatePackage();
+        } catch (const std::exception &e) {
+            return fail(-4, "PE1 music pack unavailable.", e);
+        }
+    }
     inner_config_t inner_config = generateInnerConfig(config);
     current_stage = 0;
     m_progress_callback(0, "Step 1/4 : Unpacking bin files...");
@@ -270,6 +280,10 @@ int Manager::randomize(const config_t &config) {
     }
     try {
         file_usecase.pack(workdir, filtered_files);
+        if (config.pe1_music) {
+            domain::music::pe1::apply(workdir);
+            domain::music::pe1::applyVolumeBoost(workdir);
+        }
         patches::title::applyBackground(std::filesystem::path(workdir) / "STAGE0.CDF");
         patches::weapon_variants::apply(workdir, config.rupert_revolver, config.kyle_p229);
     } catch (const std::exception &e) {

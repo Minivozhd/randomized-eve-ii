@@ -2,7 +2,7 @@
    R A N D O M I Z E D   E V E   II
 ========================================
 
-Randomized Eve II v1.3.0 - 13.10.2026
+Randomized Eve II v1.3.1 - 24.10.2026
 For Parasite Eve II (USA / NTSC-U), both original discs.
 
 Randomize encounters, items, shops, magic, and music; customize difficulty,
@@ -24,14 +24,14 @@ Open Anyway after attempting to open the app. Only do this for your verified
 release download. Runtime libraries are included inside the app.
 
 Linux x64 (Ubuntu 24.04): Install the .deb through apt to resolve dependencies:
-  sudo apt install ./Randomized-Eve-II-v1.3.0-linux-x64.deb
+  sudo apt install ./Randomized-Eve-II-v1.3.1-linux-x64.deb
 Launch Randomized Eve II from the application menu or run pe2randomizer.
 Linux x64 (Arch/CachyOS and other current distributions): use the AppImage.
 Requires glibc 2.39 or newer. Bundled libraries include wxWidgets/GTK and qrencode.
-  chmod +x Randomized-Eve-II-v1.3.0-x86_64.AppImage
-  ./Randomized-Eve-II-v1.3.0-x86_64.AppImage
+  chmod +x Randomized-Eve-II-v1.3.1-x86_64.AppImage
+  ./Randomized-Eve-II-v1.3.1-x86_64.AppImage
 If FUSE is unavailable:
-  ./Randomized-Eve-II-v1.3.0-x86_64.AppImage --appimage-extract-and-run
+  ./Randomized-Eve-II-v1.3.1-x86_64.AppImage --appimage-extract-and-run
 There is currently no Flatpak/Flathub release.
 
 How to use:
@@ -59,6 +59,30 @@ Discord: https://discord.com/invite/ybyPJYyswW
 ========================================
      V E R S I O N   H I S T O R Y
 ========================================
+
+----------------------------------------
+     v1.3.1 - 24.10.2026
+----------------------------------------
+
+New features:
+- Added "Parasite Eve 1 music": replaces gameplay music with 37 adapted
+  tracks and variants from the first Parasite Eve, grouped by scene mood.
+  The music pack is included; no separate download is required.
+- Added "No magic": disables player Parasite Energy and removes its menu
+  command and magic wheel.
+
+Improvements:
+- Added full character names to character selection and the in-game menu,
+  with more space for longer names.
+- Renamed "General / commander" to "Lieutenant".
+- Restored Pierce's sunglasses in-game and updated his portrait.
+
+Bug fixes:
+- Fixed Magic elements allowing ordinary PE-wheel casts to consume the
+  last selected inventory item, including equipped weapons such as Mongoose.
+- Unrandomized ammo boxes now preserve their original ammunition regardless
+  of drop-pool restrictions. Randomized and Full random boxes still follow
+  the allowed pool.
 
 ----------------------------------------
      v1.3.0

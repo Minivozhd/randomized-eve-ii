@@ -2,7 +2,7 @@
 
 ![Randomized Eve II — Parasite Eve II Randomizer, featuring Aya Brea](docs/images/readme-banner.png)
 
-[![Version v1.3.0](docs/images/version-chip.svg)](https://github.com/Minivozhd/randomized-eve-ii/releases/tag/v1.3.0)
+[![Version v1.3.1](docs/images/version-chip.svg)](https://github.com/Minivozhd/randomized-eve-ii/releases/tag/v1.3.1)
 [![Join Discord](docs/images/discord-chip.svg)](https://discord.com/invite/ybyPJYyswW)
 
 A desktop randomizer for **Parasite Eve II (USA / NTSC-U)**. It randomizes enemies,
@@ -37,7 +37,7 @@ See [README.txt](README.txt) for player instructions and the complete changelog.
 ## Build from source
 
 This repository contains the C++20 application, compiled patch data, CMake
-configuration and C++ tests for **1.3.0 (13 October 2026)**.
+configuration and C++ tests for **1.3.1 (24 October 2026)**.
 It does not depend on the original development checkout, Python, a MIPS compiler,
 asset generators, an emulator, or a decompilation project.
 
@@ -100,7 +100,9 @@ cmake --install build/release --prefix dist/windows --strip
 The complete application is in `dist/windows/bin/`. Copy that whole folder,
 not just the EXE. Do not add the source tree or build files to the portable ZIP.
 Avoid semicolons in the destination path. The game patch payloads are embedded
-in the EXE; only two GUI image files remain in `resources/assets/`.
+in the EXE, except for the bundled PE1 music delta at
+`resources/assets/game/music/pe1-music.pack`. Keep it and the GUI artwork
+with the application. No separate music download is needed.
 
 ### macOS and Linux
 
@@ -132,14 +134,14 @@ AppImage. It bundles wxWidgets, GTK and libqrencode and requires glibc 2.39 or
 newer. There is currently no Flatpak or Flathub release.
 
 ```sh
-chmod +x Randomized-Eve-II-v1.3.0-x86_64.AppImage
-./Randomized-Eve-II-v1.3.0-x86_64.AppImage
+chmod +x Randomized-Eve-II-v1.3.1-x86_64.AppImage
+./Randomized-Eve-II-v1.3.1-x86_64.AppImage
 ```
 
 If FUSE is unavailable, use the runtime's extraction mode:
 
 ```sh
-./Randomized-Eve-II-v1.3.0-x86_64.AppImage --appimage-extract-and-run
+./Randomized-Eve-II-v1.3.1-x86_64.AppImage --appimage-extract-and-run
 ```
 
 CI tests the AppImage on Ubuntu and in an Arch Linux container without installed
@@ -202,7 +204,7 @@ that can collide with identifiers in another namespace. New patch data belongs
 in the embedded catalogue or an existing C++ patch table, with a corresponding
 regression and updated fingerprints.
 
-The project version remains **1.3.0** until an explicit release decision. Preserve
+The project version remains **1.3.1** until an explicit release decision. Preserve
 existing settings serialization and random-number consumption during refactoring.
 The same seed is not guaranteed to produce identical drops across different C++
 standard-library implementations; compare like-for-like toolchains.

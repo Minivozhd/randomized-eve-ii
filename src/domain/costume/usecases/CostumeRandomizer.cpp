@@ -167,6 +167,7 @@ void usecase::costumes::CostumeRandomizer::chooseCostumeSlot(pe2_costume_t &cost
 
     // Training behavior must follow the room's mode, not the selected model.
     domain::costume::training::apply(game_lib_file);
+    portraits::applyNameLayout(game_lib_file);
     utils::file_works::writeByte(shooting_range_room_file, (uint8_t)costume.slot,
                                  0x29d4); // shooting range not changing costume
     utils::file_works::writeByte(shooting_range_room_file, 0x05,

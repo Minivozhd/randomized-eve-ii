@@ -187,7 +187,9 @@ void usecase::items::ItemRandomizer::randomizePickups(
         throw std::runtime_error("[ItemRandomizer] couldn't open level file file for level " + level_name +
                                  ".");
     }
-    if (randomized_box_levels.insert(level).second) {
+    // Unrandomized boxes are vanilla, independent of the randomized drop pool.
+    // Do not rewrite their descriptors or consume random draws in this mode.
+    if (config.ammo_boxes_rando_option != 0 && randomized_box_levels.insert(level).second) {
         std::vector<uint8_t> candidates;
         if (config.ammo_boxes_rando_option == 2)
             candidates = all_ammo;
@@ -196,16 +198,6 @@ void usecase::items::ItemRandomizer::randomizePickups(
                 candidates = utils::vector_works::unionVector(candidates, entry.second);
         candidates = utils::vector_works::intersecVector(candidates, config.randomized_items_drop_pool);
         for (auto offset : ammo_boxes[level]) {
-            if (config.ammo_boxes_rando_option == 0) {
-                level_file.seekg(offset);
-                const int original = level_file.get();
-                if (original < 0)
-                    throw std::runtime_error("Truncated ammo box descriptor");
-                if (std::find(config.randomized_items_drop_pool.begin(),
-                              config.randomized_items_drop_pool.end(),
-                              original) != config.randomized_items_drop_pool.end())
-                    continue;
-            }
             if (candidates.empty()) {
                 // Same disabled-box descriptor used by the No ammo boxes mod.
                 utils::file_works::writeFourBytesLittleEndian(level_file, 0x00060000, offset + 2);

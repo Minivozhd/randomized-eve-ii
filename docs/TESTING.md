@@ -3,7 +3,7 @@
 ## Default suite (no ROM required)
 
 Configure and build once, then run `ctest --preset release --output-on-failure`.
-All tests use synthetic data or the compiled release payloads. No Python, downloaded
+All tests use synthetic data or the bundled release payloads. No Python, downloaded
 fixtures, BIOS, game image or emulator is needed. CTest always lists the tests:
 
 ```sh
@@ -14,6 +14,10 @@ ctest --preset release -L mips --output-on-failure
 
 | Test | Main contract |
 | --- | --- |
+| `no_magic` | PE menu/wheel guards, item preservation and settings overrides |
+| `magic_elements` | Ordinary PE-wheel rejection without consuming inventory items |
+| `pe1_music` | Music pools, settings, volume guards and damaged-pack rejection |
+| `pe1_music_pack` | All 37 bundled music delta records match the production manifest |
 | `header_contracts` | Armor constants do not collide with item/config identifiers |
 | `core_regressions` | Settings, item pools, starts, shop ammo, rewards, spawn zones, armor catalogue and resource bounds |
 | `runtime_paths` | Installation/work/current directories remain independent; real unpacker honors work paths |

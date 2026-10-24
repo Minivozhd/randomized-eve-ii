@@ -333,6 +333,10 @@ std::string UIContext::serialize() const {
     oss.put(static_cast<char>(hud_color_g));
     oss.put(static_cast<char>(hud_color_b));
 
+    if (pe1_music)
+        oss.write("PEM1", 4);
+    if (no_magic)
+        oss.write("NMG1", 4);
     std::string binaryData = oss.str();
     return base64_encode(binaryData);
 }
@@ -345,8 +349,23 @@ void UIContext::deserialize(const std::string &base64String) {
                        sizeof(spell_cost_mult) + sizeof(spell_start_option) + sizeof(music_pool) +
                        sizeof(player_model_option);
     const bool legacy = binaryData.size() == data_size;
-    if (!legacy && (binaryData.size() != data_size + 7 || binaryData.compare(data_size, 4, "HUD1") != 0))
-        throw std::runtime_error("Invalid or unsupported settings format");
+    bool hasPe1 = false, hasNoMagic = false;
+    if (!legacy) {
+        if (binaryData.size() < data_size + 7 || binaryData.compare(data_size, 4, "HUD1") != 0 ||
+            (binaryData.size() - data_size - 7) % 4 != 0)
+            throw std::runtime_error("Invalid or unsupported settings format");
+        for (size_t pos = data_size + 7; pos < binaryData.size(); pos += 4) {
+            const auto tag = binaryData.substr(pos, 4);
+            if (tag == "PEM1" && !hasPe1)
+                hasPe1 = true;
+            else if (tag == "NMG1" && !hasNoMagic)
+                hasNoMagic = true;
+            else
+                throw std::runtime_error("Unknown or duplicate settings extension");
+        }
+    }
+    pe1_music = hasPe1;
+    no_magic = hasNoMagic;
 
     std::istringstream iss(binaryData);
 
@@ -1570,8 +1589,8 @@ delivery::config_t UIContext::convert() {
                 .randomize_enemies = (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_ENEMIES) != 0,
                 .randomize_items = (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_ITEMS) != 0,
                 .randomize_shops = (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_ITEMS) != 0,
-                .randomize_music = (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MUSIC) != 0,
-                .randomize_magic = (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MAGIC) != 0,
+                .randomize_music = !pe1_music && (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MUSIC) != 0,
+                .randomize_magic = !no_magic && (flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MAGIC) != 0,
                 .enhanced_bosses = (flags & UIContext::_UI_CONTEXT_FLAG__ENHANCED_BOSSES) != 0,
                 .full_ammo = (flags & UIContext::_UI_CONTEXT_FLAG__FULL_AMMO_START) != 0, // TODO: fix it
                 .cloak_golem_mult = (flags & UIContext::_UI_CONTEXT_FLAG__CLOAK_GOLEM_MULT) != 0,
@@ -1580,8 +1599,9 @@ delivery::config_t UIContext::convert() {
                     (flags & UIContext::_UI_CONTEXT_FLAG__ENABLE_ALL_MODES) != 0, // TODO: fix it
                 .enable_map_in_fight = false,                                     // TODO: fix it
                 .additional_armors = (flags & UIContext::_UI_CONTEXT_FLAG__NEW_ARMORS) != 0,
-                .magic_pickup_mode = (flags & UIContext::_UI_CONTEXT_FLAG__MAGIC_ELEMENTS) != 0,
-                .active_time_battle = (flags & UIContext::_UI_CONTEXT_FLAG__ACTIVE_TIME_BATTLE) != 0,
+                .magic_pickup_mode = !no_magic && (flags & UIContext::_UI_CONTEXT_FLAG__MAGIC_ELEMENTS) != 0,
+                .active_time_battle =
+                    !no_magic && (flags & UIContext::_UI_CONTEXT_FLAG__ACTIVE_TIME_BATTLE) != 0,
                 .increased_inv = (flags & UIContext::_UI_CONTEXT_FLAG__INCREASED_INV_FRAMES) != 0,
                 .no_white_screen = (flags & UIContext::_UI_CONTEXT_FLAG__NO_WHITE_SCREEN) != 0,
                 .no_win_pose = (flags & UIContext::_UI_CONTEXT_FLAG__NO_END_BATTLE_ANIM) != 0,
@@ -1626,7 +1646,9 @@ delivery::config_t UIContext::convert() {
         .boss_prototype = (flags & _UI_CONTEXT_FLAG__BOSS_PROTOTYPE) != 0,
         .stranger_row = (flags & _UI_CONTEXT_FLAG__STRANGER_ROW) != 0,
         .rupert_revolver = (flags & _UI_CONTEXT_FLAG__RUPERT_REVOLVER) != 0,
-        .kyle_p229 = (flags & _UI_CONTEXT_FLAG__KYLE_P229) != 0};
+        .kyle_p229 = (flags & _UI_CONTEXT_FLAG__KYLE_P229) != 0,
+        .pe1_music = pe1_music,
+        .no_magic = no_magic};
 }
 std::string UIContext::base64_encode(const std::string &bytes_to_encode) {
     unsigned char const *bytes = reinterpret_cast<const unsigned char *>(bytes_to_encode.data());

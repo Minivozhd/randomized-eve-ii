@@ -45,6 +45,7 @@ wxBEGIN_EVENT_TABLE(GeneralOptions, wxPanel) EVT_THREAD(1, GeneralOptions::onThr
 
     drawRandomizationOptions();
     drawRandomizationButtons();
+    updateCheckboxes();
 }
 
 void GeneralOptions::drawRandomizationOptions() {
@@ -60,6 +61,8 @@ void GeneralOptions::drawRandomizationOptions() {
         checkboxes[i]->SetValue(true);
         wxButton *button = new wxButton(this, wxID_ANY, randomization_option.button_label);
         button->Bind(wxEVT_BUTTON, randomization_option.button_click_handler);
+        if (i == 3)
+            music_randomization_button = button;
         button->SetMinSize(wxSize(GENERAL_OPTIONS_BUTTON_SIZE_WIDTH, -1));
 
         option_sizer->Add(checkboxes[i], 0, wxLEFT, 5);
@@ -137,18 +140,24 @@ void GeneralOptions::onItemsButtonClick(wxCommandEvent &event) {
 }
 
 void GeneralOptions::onMagicCheckboxClick(wxCommandEvent &event) {
+    if (ctx->no_magic)
+        return;
     ctx->flags ^= UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MAGIC;
     header->redrawContext();
     (void)event;
 }
 
 void GeneralOptions::onMagicButtonClick(wxCommandEvent &event) {
+    if (ctx->no_magic)
+        return;
     (void)event;
     MagicOptionsDialog *dialog = new MagicOptionsDialog(ctx, header);
     dialog->Show(true);
 }
 
 void GeneralOptions::onMusicCheckboxClick(wxCommandEvent &event) {
+    if (ctx->pe1_music)
+        return;
     ctx->flags ^= UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MUSIC;
     header->redrawContext();
     (void)event;
@@ -156,13 +165,15 @@ void GeneralOptions::onMusicCheckboxClick(wxCommandEvent &event) {
 
 void GeneralOptions::onMusicButtonClick(wxCommandEvent &event) {
     (void)event;
+    if (ctx->pe1_music)
+        return;
     MusicOptionsDialog *dialog = new MusicOptionsDialog(ctx, header);
     dialog->Show(true);
 }
 
 void GeneralOptions::onAdvancedOptionsClick(wxCommandEvent &event) {
     (void)event;
-    AdvancedOptionsDialog *dialog = new AdvancedOptionsDialog(ctx, header);
+    AdvancedOptionsDialog *dialog = new AdvancedOptionsDialog(ctx);
     dialog->Show(true);
 }
 
@@ -259,6 +270,10 @@ void GeneralOptions::onThreadWorkDone(wxThreadEvent &event) {
 void GeneralOptions::updateCheckboxes() {
     checkboxes[0]->SetValue(ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_ENEMIES);
     checkboxes[1]->SetValue(ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_ITEMS);
-    checkboxes[2]->SetValue(ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MAGIC);
-    checkboxes[3]->SetValue(ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MUSIC);
+    checkboxes[2]->SetValue(!ctx->no_magic && (ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MAGIC));
+    checkboxes[2]->Enable(!ctx->no_magic);
+    magic_randomization_button->Enable(!ctx->no_magic);
+    checkboxes[3]->SetValue(!ctx->pe1_music && (ctx->flags & UIContext::_UI_CONTEXT_FLAG__RANDOMIZE_MUSIC));
+    checkboxes[3]->Enable(!ctx->pe1_music);
+    music_randomization_button->Enable(!ctx->pe1_music);
 }

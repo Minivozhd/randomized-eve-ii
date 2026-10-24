@@ -148,6 +148,7 @@ static void testCloakResources() {
 }
 namespace usecase::items {
 struct ItemRandomizerTestAccess {
+    static std::mt19937 rng(const ItemRandomizer &r) { return r.gen; }
     static void table(ItemRandomizer &r, domain::encounter::pe2_enc_rewards_segment_t segment,
                       std::vector<domain::encounter::pe2_enc_reward_descriptor_t> rows) {
         r.randomizeRewards(domain::game::AKROPOLIS_LEVEL, segment, rows);
@@ -676,7 +677,7 @@ int main() {
             in.seekg(0x24ce);
             require(in.get() == 0xac, "Ammo box changed on repeated pickup pass");
         }
-        for (int mode : {0, 1, 2}) {
+        for (int mode : {1, 2}) {
             {
                 std::fstream out(path, std::ios::in | std::ios::out | std::ios::binary);
                 out.seekp(0x24ce);
@@ -691,6 +692,39 @@ int main() {
             std::ifstream in(path, std::ios::binary);
             in.seekg(0x24ce);
             require(in.get() == 0xac, "Box mode leaked forbidden vanilla 9mm");
+        }
+        // Vanilla ammo boxes ignore drop restrictions, including an empty pool.
+        // Check every registered level and the complete descriptor/file, not just
+        // the ammo ID: the previous fallback could also disable the box.
+        for (const auto &[level, offsets] : ammo_boxes) {
+            if (offsets.empty())
+                continue;
+            const auto boxPath = dir / "STAGE0" /
+                (domain::game::getNameFromLevel(level) + std::string(FORMAT_LEVEL_FILE) + FORMAT_DECOMPRESSED);
+            std::vector<unsigned char> original(*std::max_element(offsets.begin(), offsets.end()) + 16, 0x5a);
+            for (auto offset : offsets)
+                original[offset] = 0xa0;
+            for (const auto &pool : std::vector<std::vector<uint8_t>>{{}, {0x01}, {0xac}, {0xa0}}) {
+                {
+                    std::ofstream out(boxPath, std::ios::binary | std::ios::trunc);
+                    out.write(reinterpret_cast<const char *>(original.data()), original.size());
+                }
+                auto vanillaCfg = cfg;
+                vanillaCfg.ammo_boxes_rando_option = 0;
+                vanillaCfg.randomized_items_drop_pool = pool;
+                usecase::items::ItemRandomizer vanilla(log, std::mt19937(1), dir.string() + "/", vanillaCfg);
+                usecase::items::ItemRandomizerTestAccess::ammo(vanilla, 0xac);
+                const auto rngBefore = usecase::items::ItemRandomizerTestAccess::rng(vanilla);
+                for (int pass = 0; pass < 2; ++pass)
+                    usecase::items::ItemRandomizerTestAccess::boxes(vanilla, level);
+                std::ifstream in(boxPath, std::ios::binary);
+                const std::vector<unsigned char> actual(std::istreambuf_iterator<char>(in), {});
+                require(actual == original, "Unrandomized ammo box was changed by drop restrictions");
+                require(usecase::items::ItemRandomizerTestAccess::rng(vanilla) == rngBefore,
+                        "Unrandomized ammo boxes consumed random draws");
+            }
+            if (boxPath != path)
+                std::filesystem::remove(boxPath);
         }
         // Short replacement lists must not leave reachable vanilla reward rows
         // containing disabled items after the new rows.

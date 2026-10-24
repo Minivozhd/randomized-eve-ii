@@ -7,6 +7,25 @@ wxBEGIN_EVENT_TABLE(AdvancedOptionsDialog, wxFrame) EVT_CLOSE(AdvancedOptionsDia
         const std::string AdvancedOptionsDialog::_ADVANCED_OPTIONS_DIALOG_TITLE = "Advanced Options";
 const std::vector<AdvancedOptionsDialog::Modificator> AdvancedOptionsDialog::_ADVANCED_OPTIONS_MODIFICATORS{
     {
+        .name = "Parasite Eve 1 music",
+        .tip = "Replaces gameplay music with 37 adapted PE1 tracks and phases, grouped by mood. Overrides "
+               "regular music randomization while enabled. The music pack is included.",
+        .type = MODIFICATOR_TYPE_ON_OFF,
+        .options = {},
+        .flag = uint64_t{1} << 32,
+        .setting = &UIContext::pe1_music,
+    },
+    {
+        .name = "No magic",
+        .tip = "Disables player Parasite Energy, removes its menu command and blocks the magic wheel. "
+               "Overrides magic randomization, Magic elements and Active time battle while enabled. "
+               "Enemy abilities and ordinary items remain available.",
+        .type = MODIFICATOR_TYPE_ON_OFF,
+        .options = {},
+        .flag = uint64_t{1} << 33,
+        .setting = &UIContext::no_magic,
+    },
+    {
         .name = "Rupert's revolver sound",
         .tip = "Uses Rupert's cafeteria cutscene gunshot for the Mongoose. Works with either ammo type and "
                "any player model; weapon stats stay unchanged.",
@@ -44,7 +63,7 @@ const std::vector<AdvancedOptionsDialog::Modificator> AdvancedOptionsDialog::_AD
     Modificator{
         .name = "Ammo boxes randomization:",
         .tip = "Randomized boxes choose ammo for weapons in the generated pool. Full random boxes can choose "
-               "ammo for other weapons. Unrandomized boxes keep their original ammo types.",
+               "ammo for other weapons. Unrandomized boxes keep their original ammo types, even when those types are disabled in the drop pool.",
         .type = MODIFICATOR_TYPE_MULTIPLE_OPTIONS,
         .options{
             ModificatorOption{.id = RANDOMIZED_BOXES,
@@ -148,10 +167,10 @@ const std::vector<AdvancedOptionsDialog::Modificator> AdvancedOptionsDialog::_AD
         .flag = UIContext::_UI_CONTEXT_FLAG__ENABLE_ALL_MODES,
     }};
 
-AdvancedOptionsDialog::AdvancedOptionsDialog(std::shared_ptr<UIContext> _ctx, Header *_header)
+AdvancedOptionsDialog::AdvancedOptionsDialog(std::shared_ptr<UIContext> _ctx)
     : wxFrame(NULL, wxID_ANY, _ADVANCED_OPTIONS_DIALOG_TITLE, wxDefaultPosition,
               wxSize(_ADVANCED_OPTIONS_DIALOG_WIDTH, _ADVANCED_OPTIONS_DIALOG_HEIGHT)),
-      ctx(_ctx), header(_header) {
+      ctx(_ctx) {
     panel = new wxPanel(this, wxID_ANY);
     dialog_sizer = new wxBoxSizer(wxVERTICAL);
     dialog_inner_sizer = new wxBoxSizer(wxVERTICAL);
@@ -162,6 +181,8 @@ AdvancedOptionsDialog::AdvancedOptionsDialog(std::shared_ptr<UIContext> _ctx, He
     ctx_copy = UIContext(0, ctx->logger);
     ctx_copy.player_model_option = _ctx->player_model_option;
     ctx_copy.flags = _ctx->flags;
+    ctx_copy.pe1_music = _ctx->pe1_music;
+    ctx_copy.no_magic = _ctx->no_magic;
 
     DrawModificators();
     ui::fitContent(this, panel);
@@ -262,20 +283,20 @@ void AdvancedOptionsDialog::DrawModificators() {
                                     "Aya (Assault Suit)",
                                     "Regina (Dino Crisis 2 / Default)",
                                     "Regina (Dino Crisis 2 / Lightweight armor)",
-                                    "Jodie (MIST Garage)",
-                                    "Jodie (Military Camp)",
+                                    "Jodie Bouquet (MIST Garage)",
+                                    "Jodie Bouquet (Military Camp)",
                                     "Cafeteria woman NPC",
                                     "Toilet woman NPC",
-                                    "Jill (Resident Evil 1)",
-                                    "Kyle",
-                                    "Rupert",
-                                    "Douglas",
+                                    "Jill Valentine (Resident Evil 1)",
+                                    "Kyle Madigan",
+                                    "Rupert Broderick",
+                                    "Gary Douglas",
                                     "Police officer",
-                                    "General / commander",
+                                    "Lieutenant",
                                     "President",
-                                    "Baldwin",
+                                    "Eric Baldwin",
                                     "Soldier",
-                                    "Pierce"};
+                                    "Pierce Carradine"};
     starting_costume_combobox =
         new wxComboBox(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, costumes, wxCB_READONLY);
     starting_costume_combobox->SetSelection(
@@ -300,7 +321,7 @@ void AdvancedOptionsDialog::DrawModificators() {
     RefreshMutators();
 }
 
-void AdvancedOptionsDialog::RefreshMutators(uint32_t selectedFlag) {
+void AdvancedOptionsDialog::RefreshMutators(uint64_t selectedFlag) {
     availableList->Clear();
     activeList->Clear();
     availableMods.clear();
@@ -309,12 +330,15 @@ void AdvancedOptionsDialog::RefreshMutators(uint32_t selectedFlag) {
     for (const auto &mod : _ADVANCED_OPTIONS_MODIFICATORS) {
         if (mod.type != MODIFICATOR_TYPE_ON_OFF)
             continue;
-        const bool active = (ctx_copy.flags & mod.flag) != 0;
+        const bool active = mod.setting ? ctx_copy.*mod.setting : (ctx_copy.flags & mod.flag) != 0;
         auto *list = active ? activeList : availableList;
         auto &mods = active ? activeMods : availableMods;
         mods.push_back(&mod);
-        const int index = list->Append(mod.name);
-        if (mod.flag == selectedFlag) {
+        const bool overridden = ctx_copy.no_magic && !mod.setting &&
+                                (mod.flag == UIContext::_UI_CONTEXT_FLAG__MAGIC_ELEMENTS ||
+                                 mod.flag == UIContext::_UI_CONTEXT_FLAG__ACTIVE_TIME_BATTLE);
+        const int index = list->Append(mod.name + (active && overridden ? " (overridden by No magic)" : ""));
+        if ((mod.flag) == selectedFlag) {
             list->SetSelection(index);
             selectedList = list;
         }
@@ -351,12 +375,14 @@ void AdvancedOptionsDialog::MoveMutator(bool activate) {
     const int index = list->GetSelection();
     if (index == wxNOT_FOUND)
         return;
-    const uint32_t flag = mods[index]->flag;
-    if (activate)
-        ctx_copy.flags |= flag;
+    const auto &mod = *mods[index];
+    if (mod.setting)
+        ctx_copy.*mod.setting = activate;
+    else if (activate)
+        ctx_copy.flags |= static_cast<uint32_t>(mod.flag);
     else
-        ctx_copy.flags &= ~flag;
-    RefreshMutators(flag);
+        ctx_copy.flags &= ~static_cast<uint32_t>(mod.flag);
+    RefreshMutators(mod.flag);
     (activate ? activeList : availableList)->SetFocus();
 }
 
@@ -394,6 +420,8 @@ void AdvancedOptionsDialog::OnApplyEvent(wxCommandEvent &event) {
 
     ctx->player_model_option = ctx_copy.player_model_option;
     ctx->flags = ctx_copy.flags;
+    ctx->pe1_music = ctx_copy.pe1_music;
+    ctx->no_magic = ctx_copy.no_magic;
     if (items_dist_changed) {
         ctx->items_dist[0] = ctx_copy.items_dist[0];
         ctx->items_dist[1] = ctx_copy.items_dist[1];
@@ -408,7 +436,7 @@ void AdvancedOptionsDialog::OnApplyEvent(wxCommandEvent &event) {
         ctx->hud_color_b = colorSliders[2]->GetValue();
     }
 
-    header->redrawContext();
+    ctx->notifyListeners();
     Destroy();
 }
 
@@ -423,8 +451,10 @@ void AdvancedOptionsDialog::OnDefaultEvent(wxCommandEvent &event) {
     radiobuttons[5]->SetValue(true);
     for (const auto &mod : _ADVANCED_OPTIONS_MODIFICATORS) {
         if (mod.type == MODIFICATOR_TYPE_ON_OFF)
-            ctx_copy.flags &= ~mod.flag;
+            ctx_copy.flags &= ~static_cast<uint32_t>(mod.flag);
     }
+    ctx_copy.pe1_music = false;
+    ctx_copy.no_magic = false;
     ctx_copy.flags |= UIContext::_UI_CONTEXT_FLAG__ENABLE_ALL_MODES;
     RefreshMutators();
     starting_costume_combobox->SetSelection(0);

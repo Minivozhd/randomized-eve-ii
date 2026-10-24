@@ -412,6 +412,8 @@ class UIContext {
     uint8_t hud_color_r;
     uint8_t hud_color_g;
     uint8_t hud_color_b;
+    bool pe1_music = false;
+    bool no_magic = false;
     std::string disc_1;
     std::string disc_2;
     std::shared_ptr<PE2Logger> logger;

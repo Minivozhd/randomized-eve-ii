@@ -34,7 +34,9 @@ file-based compressor requires them. It does not extract patches beside the EXE.
 
 The catalogue stores payloads once, in five translation units grouped by family.
 The explicit source list avoids compiling research or prototype directories by
-accident. GUI artwork is the only external resource family.
+accident. GUI artwork and the guarded PE1 music delta are external runtime resources,
+explicitly listed in `cmake/RuntimeResources.cmake`. No source music banks
+or conversion tools are needed to build or run the application.
 
 `utils::paths` separates immutable installation resources from writable work.
 The GUI configures both; headless integration tests configure only work. Initialization

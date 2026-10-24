@@ -957,7 +957,7 @@
   },
   "game/players/pierce.pe2mp": {
     "size": 65568,
-    "sha256": "54b2f85acff5fe7e5f9f08aa7d79d94a40639c5ececacf8cc1d3d2b3610deeeb"
+    "sha256": "a2f48c731352020b6011701d5f5c082323f448490b10ba9e170d815cea39941d"
   },
   "game/players/police.pe2mp": {
     "size": 65568,
@@ -981,67 +981,67 @@
   },
   "game/portraits/aya.pe2pt": {
     "size": 14380,
-    "sha256": "f589065b279c05d3040ba6242fa53d082446b66b8cb46d8d6180da042346f977"
+    "sha256": "12c3ed1905e54bf8bd2d3f0b1035022d7c5e789ebc422a2c77b54bb08f4300e1"
   },
   "game/portraits/baldwin.pe2pt": {
     "size": 14380,
-    "sha256": "6f623ae332e585435d4c2eebf91d9def1340e2350f052b2a9b57ec537440358d"
+    "sha256": "5170464f521d88df34d61343ecf2c98d4452f99022b8a840eba1544e177c21d5"
   },
   "game/portraits/cafeteria.pe2pt": {
     "size": 14380,
-    "sha256": "2ed6257d9fb2255ed21e89382a50be7d16ad4b755b9aba8baf03f3b30e008332"
+    "sha256": "31b65fc09a1dba7c98d303da94ad105fcfca3382319170e32da0ccd141656486"
   },
   "game/portraits/douglas.pe2pt": {
     "size": 14380,
-    "sha256": "18e836738f34f8425de466a8183abe6b7981987f73f186df08d68843afeeff85"
+    "sha256": "632ab7240bc42441a981735dc2977cebabebce9517f67734181d704c7d7eb0f1"
   },
   "game/portraits/general.pe2pt": {
     "size": 14380,
-    "sha256": "ce792934ab3df0e188b19427a5e45883c8e308c8414c9bb1b38fcf3c1b29fa46"
+    "sha256": "9b59dee4e8245716adc4aab61ffffdd446bbe85fec99a78364e935b128eb11f5"
   },
   "game/portraits/jill.pe2pt": {
     "size": 14380,
-    "sha256": "84d4bc6435e8a23391b378f36e1fc4fdc39a72a9523adea63053fc333a70ac35"
+    "sha256": "247f5f70ea677e3fce119a1563c59003084f0dd30ce3bdf30d7c3970637ab04e"
   },
   "game/portraits/jodie-camp.pe2pt": {
     "size": 14380,
-    "sha256": "6e022b2e6b5c4a90e524802279a44d0001b337435553d1de51f7bf09a5f71f62"
+    "sha256": "cac2ecd14c9f4f7f75f0ff641b5cccd595ec1344bba465e93bd2ab5b4f22fc90"
   },
   "game/portraits/jodie.pe2pt": {
     "size": 14380,
-    "sha256": "f49f3f0181773b8c01469132b936660fe755a003c2b4f1def53ce36ec001cab5"
+    "sha256": "1dd1b278d9d844e87cc5c4a9e347cba02ca9cb95244dcafe597005e4e8503821"
   },
   "game/portraits/kyle.pe2pt": {
     "size": 14380,
-    "sha256": "9949afeebcac2e930f59f1c644955e99f1367fb6e5867cbfe868a45a2a253e53"
+    "sha256": "92a431075a6d9526f8dbf12cfc9604aa88d0d1f207a6dd62c88055300b12c144"
   },
   "game/portraits/pierce.pe2pt": {
     "size": 14380,
-    "sha256": "75bb249727afdb23003ff0a859bb096f8596ee6a4b3c0c4944a9da0a06b9a5c2"
+    "sha256": "e0544a178d03c18077b3ff1687bdec0391af4b98b461c8e5e7ccadf59e1ef791"
   },
   "game/portraits/police.pe2pt": {
     "size": 14380,
-    "sha256": "d89b76f7a13e3b434584615c82ba9d256db12afecd41d8ddd882e6a40f9ec45c"
+    "sha256": "f1bae1b3649b06410f845f7a3154105620828fb97f89fd0447af5385ff0497ab"
   },
   "game/portraits/president.pe2pt": {
     "size": 14380,
-    "sha256": "8eefcf4c6e503a74001be10e2a24fbcaf24112eb04a718daf0d325d0435c8b94"
+    "sha256": "75d67112ad6b44672c15706674481566a1e5437fe4f374bcfbc7cb701d0db45d"
   },
   "game/portraits/regina.pe2pt": {
     "size": 14380,
-    "sha256": "240259a11189b6944c1947776e365957ed4d544d27be874535e00935fcc2a28d"
+    "sha256": "6899c0c5573d4a59eafa28b7159d91bde3552003cdbb43e79ff4fd2df5aa2b4f"
   },
   "game/portraits/rupert.pe2pt": {
     "size": 14380,
-    "sha256": "8235095ae2aa1b048ae91de4d786d6b4276749c52f33e5d442a5af2f1c94f935"
+    "sha256": "a80a60e7f812387e98c83e5b0737f9a95e8abc20b40bf2915d1f5da3d1d2003a"
   },
   "game/portraits/soldier.pe2pt": {
     "size": 14380,
-    "sha256": "12063fc180adea47f37287c7fa0468517ea8ac3e6e5609ff3a956f59e159e2bb"
+    "sha256": "d3653de00abb54108439290d62bd423055caccb74367f59e0ab3b75a118699b5"
   },
   "game/portraits/toilet.pe2pt": {
     "size": 14380,
-    "sha256": "0f4e6abbce98d993fdd0d52f361bba0e4345a04efbb75b7838b1da7f7b93f5d0"
+    "sha256": "838aea817cf8a15625b57e683545a5c49fbd3ac3848391f20a728b89ed07372f"
   },
   "game/weapon_variants/kyle-male.pe2mp": {
     "size": 84012,

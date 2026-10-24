@@ -5,7 +5,7 @@ on:
       tag:
         description: Existing release tag to package (uses its published DEB)
         required: true
-        default: v1.3.0
+        default: v1.3.1
 permissions:
   contents: read
 concurrency:

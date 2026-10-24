@@ -2,7 +2,8 @@
 
 Randomized Eve II is an unofficial fan project by Strog and TheVozhd. It is not
 affiliated with or endorsed by the creators or publishers of Parasite Eve II.
-The game, characters, artwork, bitmap lettering and game-derived patch resources
+The games, music (including the adapted Parasite Eve soundtrack), characters,
+artwork, bitmap lettering and game-derived patch resources
 belong to their respective rights holders. This repository includes modification
 data and artwork; it does not include game disc images, BIOS files or saved games.
 Users must supply their own supported original game images.

@@ -15,7 +15,7 @@
 
 class AdvancedOptionsDialog : public wxFrame {
   public:
-    AdvancedOptionsDialog(std::shared_ptr<UIContext>, Header *);
+    AdvancedOptionsDialog(std::shared_ptr<UIContext>);
 
     enum ModificatorType {
         MODIFICATOR_TYPE_ON_OFF,
@@ -50,13 +50,13 @@ class AdvancedOptionsDialog : public wxFrame {
         std::string tip;
         ModificatorType type;
         std::vector<ModificatorOption> options;
-        uint32_t flag = 0;
+        uint64_t flag = 0;
+        bool UIContext::*setting = nullptr;
     };
 
   private:
     std::shared_ptr<UIContext> ctx;
     UIContext ctx_copy;
-    Header *header;
     wxListBox *availableList;
     wxListBox *activeList;
     wxStaticText *availableLabel;
@@ -84,7 +84,7 @@ class AdvancedOptionsDialog : public wxFrame {
     void OnDefaultEvent(wxCommandEvent &);
     void OnSliderChanged(wxCommandEvent &);
     void UpdateSlidersEnabled();
-    void RefreshMutators(uint32_t selectedFlag = 0);
+    void RefreshMutators(uint64_t selectedFlag = 0);
     void SelectMutator(wxListBox *list);
     void MoveMutator(bool activate);
 

@@ -1,4 +1,5 @@
 #include "domain/music/usecases/MusicRandomizer.hpp"
+#include "domain/music/usecases/Pe1Music.hpp"
 
 using namespace domain::music;
 using namespace domain::game;
@@ -40,12 +41,15 @@ void usecase::music::MusicRandomizer::randomizeMusicInStage(std::string filename
 
     for (pe2_music_entry_t entry : entries) {
         std::vector<uint8_t> initial_music_pool =
-            utils::vector_works::intersecVector(music_types_map[entry.type], config.randomized_music_pool);
+            config.pe1_music ? domain::music::pe1::pool(entry.type)
+                             : utils::vector_works::intersecVector(music_types_map[entry.type],
+                                                                   config.randomized_music_pool);
         std::vector<uint8_t> allowed_music_ids =
             utils::vector_works::substractVector(initial_music_pool, entry.forbidden_music);
         if (allowed_music_ids.size() <= 0) {
-            allowed_music_ids =
-                utils::vector_works::substractVector(music_types_map[MUSIC_MISC], entry.forbidden_music);
+            allowed_music_ids = utils::vector_works::substractVector(
+                config.pe1_music ? domain::music::pe1::pool(MUSIC_MISC) : music_types_map[MUSIC_MISC],
+                entry.forbidden_music);
         }
 
         // Setting default music if couldn't find anything suitable. Let it be acropolis first peace music.

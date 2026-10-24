@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
         std::filesystem::temp_directory_path() /
         ("pe2-training-" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
     try {
-        std::vector<char> before(0x20000, 0x5a);
+        std::vector<char> before(0x30000, 0x5a);
         if (argc == 3) {
             std::ifstream in(argv[1], std::ios::binary);
             before = {std::istreambuf_iterator<char>(in), {}};
@@ -37,6 +37,13 @@ int main(int argc, char **argv) {
                 write(file, o + 8, 0x38420004);
                 write(file, o + 12, p.address == 0x800a74ec ? 0x03e00008u : 0x2c420001u);
             }
+        if (argc != 3) {
+            // The integrated costume writer also validates the retail name renderer.
+            write(file, 0x2df60, 0x2442ff8e);
+            write(file, 0x2df70, 0x24020038);
+            write(file, 0x2df78, 0x24020060);
+            write(file, 0x2df80, 0x24020040);
+        }
         file.flush();
         {
             std::ifstream in(path, std::ios::binary);
